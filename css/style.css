@@ -650,3 +650,787 @@
   white-space: nowrap;
   border-width: 0;
 }
+/* Media Queries voor verschillende apparaten */
+
+/* Extra kleine apparaten (kleine telefoons, <576px) - bijv. iPhone SE (375px) */
+@media screen and (max-width: 575px) {
+  .frame {
+    min-width: 320px;
+    min-height: 568px;
+  }
+
+  .frame .image {
+    width: 100%;
+    height: 100%;
+    max-width: 375px;
+    max-height: 667px;
+  }
+
+  .frame .div {
+    top: 220px;
+    left: 37px;
+    width: 280px;
+    height: 180px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 250px;
+    margin-left: 10px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 250px;
+  }
+
+  .frame .text-wrapper {
+    font-size: 16px;
+  }
+
+  .frame .text-wrapper-2 {
+    font-size: 16px;
+  }
+
+  .frame .div-2 {
+    top: 120px;
+    left: 30px;
+    width: 315px;
+  }
+
+  .frame .text-wrapper-3 {
+    font-size: 32px;
+  }
+
+  .frame .eos-icons-admin,
+  .frame .eos-icons-admin-2 {
+    top: 520px;
+    width: 100%;
+    height: 48px;
+  }
+
+  .frame .div-4,
+  .frame .div-5,
+  .frame .div-6,
+  .frame .div-7,
+  .frame .div-8,
+  .frame .div-9 {
+    height: 48px;
+    padding: 8px;
+  }
+
+  .frame .text-wrapper-4,
+  .frame .text-wrapper-5 {
+    font-size: 9px;
+  }
+}
+
+/* Kleine apparaten (telefoons, 576px - 767px) - bijv. iPhone 12 (390px), Pixel 5 (393px) */
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .frame {
+    min-width: 360px;
+    min-height: 640px;
+  }
+
+  .frame .image {
+    width: 360px;
+    height: 640px;
+  }
+
+  .frame .div {
+    top: 257px;
+    left: 63px;
+    width: 245px;
+    height: 202px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 217px;
+    margin-left: 14px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 215px;
+  }
+
+  .frame .text-wrapper {
+    font-size: 18px;
+  }
+
+  .frame .text-wrapper-2 {
+    font-size: 18px;
+  }
+
+  .frame .div-2 {
+    top: 141px;
+    left: 34px;
+    width: 274px;
+  }
+
+  .frame .text-wrapper-3 {
+    font-size: 36px;
+  }
+
+  .frame .eos-icons-admin,
+  .frame .eos-icons-admin-2 {
+    top: 584px;
+    width: 360px;
+    height: 56px;
+  }
+
+  .frame .text-wrapper-4,
+  .frame .text-wrapper-5 {
+    font-size: 10px;
+  }
+}
+
+/* Middelgrote apparaten (tablets, 768px - 991px) - bijv. iPad Mini (768px), iPad (810px) */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .frame {
+    width: 768px;
+    min-height: 1024px;
+  }
+
+  .frame .image {
+    width: 768px;
+    height: 1024px;
+  }
+
+  .frame .div {
+    top: 400px;
+    left: 200px;
+    width: 368px;
+    height: 304px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 340px;
+    height: 60px;
+    margin-left: 14px;
+    margin-top: 25px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 340px;
+    height: 50px;
+    margin-top: 20px;
+  }
+
+  .frame .text-wrapper {
+    font-size: 20px;
+  }
+
+  .frame .text-wrapper-2 {
+    font-size: 20px;
+  }
+
+  .frame .div-2 {
+    top: 200px;
+    left: 100px;
+    width: 568px;
+  }
+
+  .frame .mdi-map-marker {
+    width: 50px;
+    height: 50px;
+  }
+
+  .frame .text-wrapper-3 {
+    font-size: 48px;
+  }
+
+  .frame .eos-icons-admin,
+  .frame .eos-icons-admin-2 {
+    top: 968px;
+    width: 768px;
+    height: 56px;
+  }
+
+  .frame .div-4,
+  .frame .div-5,
+  .frame .div-6,
+  .frame .div-7,
+  .frame .div-8,
+  .frame .div-9 {
+    height: 56px;
+    padding: 10px;
+  }
+
+  .frame .text-wrapper-4,
+  .frame .text-wrapper-5 {
+    font-size: 12px;
+  }
+}
+
+/* Grote apparaten (laptops, 992px - 1199px) - bijv. MacBook Air (1280px), standaard laptops */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .frame {
+    width: 992px;
+    min-height: 1200px;
+  }
+
+  .frame .image {
+    width: 992px;
+    height: 1200px;
+  }
+
+  .frame .div {
+    top: 500px;
+    left: 300px;
+    width: 392px;
+    height: 324px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 364px;
+    height: 65px;
+    margin-left: 14px;
+    margin-top: 30px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 364px;
+    height: 55px;
+    margin-top: 25px;
+  }
+
+  .frame .text-wrapper {
+    font-size: 22px;
+  }
+
+  .frame .text-wrapper-2 {
+    font-size: 22px;
+  }
+
+  .frame .div-2 {
+    top: 250px;
+    left: 150px;
+    width: 692px;
+  }
+
+  .frame .mdi-map-marker {
+    width: 60px;
+    height: 60px;
+  }
+
+  .frame .text-wrapper-3 {
+    font-size: 56px;
+  }
+
+  .frame .eos-icons-admin,
+  .frame .eos-icons-admin-2 {
+    top: 1144px;
+    width: 992px;
+    height: 56px;
+  }
+
+  .frame .text-wrapper-4,
+  .frame .text-wrapper-5 {
+    font-size: 14px;
+  }
+}
+
+/* Extra grote apparaten (desktops, >=1200px) - bijv. Full HD (1920px), 4K schermen */
+@media screen and (min-width: 1200px) {
+  .frame {
+    width: 1200px;
+    min-height: 1400px;
+  }
+
+  .frame .image {
+    width: 1200px;
+    height: 1400px;
+  }
+
+  .frame .div {
+    top: 600px;
+    left: 400px;
+    width: 400px;
+    height: 330px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 372px;
+    height: 70px;
+    margin-left: 14px;
+    margin-top: 35px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 372px;
+    height: 60px;
+    margin-top: 30px;
+  }
+
+  .frame .text-wrapper {
+    font-size: 24px;
+  }
+
+  .frame .text-wrapper-2 {
+    font-size: 24px;
+  }
+
+  .frame .div-2 {
+    top: 300px;
+    left: 200px;
+    width: 800px;
+  }
+
+  .frame .mdi-map-marker {
+    width: 70px;
+    height: 70px;
+  }
+
+  .frame .text-wrapper-3 {
+    font-size: 64px;
+  }
+
+  .frame .eos-icons-admin,
+  .frame .eos-icons-admin-2 {
+    top: 1344px;
+    width: 1200px;
+    height: 56px;
+  }
+
+  .frame .text-wrapper-4,
+  .frame .text-wrapper-5 {
+    font-size: 16px;
+  }
+}
+
+/* Specifieke aanpassingen voor populaire telefoonmodellen */
+
+/* iPhone SE (375px breedte) */
+@media screen and (max-width: 375px) {
+  .frame {
+    min-width: 320px;
+    min-height: 568px;
+  }
+
+  .frame .image {
+    width: 375px;
+    height: 667px;
+  }
+
+  .frame .div {
+    top: 230px;
+    left: 40px;
+    width: 295px;
+    height: 190px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 267px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 267px;
+  }
+}
+
+/* iPhone 12/13/14 (390px breedte) */
+@media screen and (min-width: 390px) and (max-width: 393px) {
+  .frame .image {
+    width: 390px;
+    height: 844px;
+  }
+
+  .frame .div {
+    top: 270px;
+    left: 50px;
+    width: 290px;
+    height: 210px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 262px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 262px;
+  }
+}
+
+/* iPhone 14 Pro Max (428px breedte) */
+@media screen and (min-width: 428px) and (max-width: 431px) {
+  .frame .image {
+    width: 428px;
+    height: 926px;
+  }
+
+  .frame .div {
+    top: 290px;
+    left: 60px;
+    width: 308px;
+    height: 220px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 280px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 280px;
+  }
+}
+
+/* Samsung Galaxy S21 (360px breedte) */
+@media screen and (max-width: 360px) {
+  .frame {
+    min-width: 320px;
+    min-height: 640px;
+  }
+
+  .frame .image {
+    width: 360px;
+    height: 640px;
+  }
+
+  .frame .div {
+    top: 220px;
+    left: 35px;
+    width: 290px;
+    height: 180px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 262px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 262px;
+  }
+}
+
+/* Pixel 5 (393px breedte) */
+@media screen and (min-width: 393px) and (max-width: 395px) {
+  .frame .image {
+    width: 393px;
+    height: 851px;
+  }
+
+  .frame .div {
+    top: 280px;
+    left: 55px;
+    width: 283px;
+    height: 205px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 255px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 255px;
+  }
+}
+
+/* Laptops en PC's - specifieke resoluties */
+
+/* 1024x768 (oude laptops) */
+@media screen and (min-width: 1024px) and (max-width: 1025px) and (max-height: 769px) {
+  .frame {
+    width: 1024px;
+    min-height: 768px;
+  }
+
+  .frame .image {
+    width: 1024px;
+    height: 768px;
+  }
+
+  .frame .div {
+    top: 300px;
+    left: 250px;
+    width: 524px;
+    height: 432px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 496px;
+    height: 80px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 496px;
+    height: 70px;
+  }
+
+  .frame .text-wrapper {
+    font-size: 26px;
+  }
+
+  .frame .text-wrapper-2 {
+    font-size: 26px;
+  }
+
+  .frame .div-2 {
+    top: 150px;
+    left: 125px;
+    width: 774px;
+  }
+
+  .frame .mdi-map-marker {
+    width: 80px;
+    height: 80px;
+  }
+
+  .frame .text-wrapper-3 {
+    font-size: 72px;
+  }
+
+  .frame .eos-icons-admin,
+  .frame .eos-icons-admin-2 {
+    top: 712px;
+    width: 1024px;
+  }
+}
+
+/* 1366x768 (standaard laptops) */
+@media screen and (min-width: 1366px) and (max-width: 1367px) and (max-height: 769px) {
+  .frame {
+    width: 1366px;
+    min-height: 768px;
+  }
+
+  .frame .image {
+    width: 1366px;
+    height: 768px;
+  }
+
+  .frame .div {
+    top: 250px;
+    left: 400px;
+    width: 566px;
+    height: 468px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 538px;
+    height: 85px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 538px;
+    height: 75px;
+  }
+
+  .frame .text-wrapper {
+    font-size: 28px;
+  }
+
+  .frame .text-wrapper-2 {
+    font-size: 28px;
+  }
+
+  .frame .div-2 {
+    top: 100px;
+    left: 200px;
+    width: 966px;
+  }
+
+  .frame .mdi-map-marker {
+    width: 90px;
+    height: 90px;
+  }
+
+  .frame .text-wrapper-3 {
+    font-size: 80px;
+  }
+
+  .frame .eos-icons-admin,
+  .frame .eos-icons-admin-2 {
+    top: 712px;
+    width: 1366px;
+  }
+}
+
+/* 1440x900 (MacBook Pro 15") */
+@media screen and (min-width: 1440px) and (max-width: 1441px) and (max-height: 901px) {
+  .frame {
+    width: 1440px;
+    min-height: 900px;
+  }
+
+  .frame .image {
+    width: 1440px;
+    height: 900px;
+  }
+
+  .frame .div {
+    top: 300px;
+    left: 450px;
+    width: 540px;
+    height: 446px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 512px;
+    height: 80px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 512px;
+    height: 70px;
+  }
+
+  .frame .text-wrapper {
+    font-size: 26px;
+  }
+
+  .frame .text-wrapper-2 {
+    font-size: 26px;
+  }
+
+  .frame .div-2 {
+    top: 150px;
+    left: 225px;
+    width: 990px;
+  }
+
+  .frame .mdi-map-marker {
+    width: 85px;
+    height: 85px;
+  }
+
+  .frame .text-wrapper-3 {
+    font-size: 76px;
+  }
+
+  .frame .eos-icons-admin,
+  .frame .eos-icons-admin-2 {
+    top: 844px;
+    width: 1440px;
+  }
+}
+
+/* 1920x1080 (Full HD) */
+@media screen and (min-width: 1920px) and (max-width: 1921px) and (max-height: 1081px) {
+  .frame {
+    width: 1920px;
+    min-height: 1080px;
+  }
+
+  .frame .image {
+    width: 1920px;
+    height: 1080px;
+  }
+
+  .frame .div {
+    top: 400px;
+    left: 700px;
+    width: 520px;
+    height: 430px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 492px;
+    height: 75px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 492px;
+    height: 65px;
+  }
+
+  .frame .text-wrapper {
+    font-size: 24px;
+  }
+
+  .frame .text-wrapper-2 {
+    font-size: 24px;
+  }
+
+  .frame .div-2 {
+    top: 200px;
+    left: 350px;
+    width: 1220px;
+  }
+
+  .frame .mdi-map-marker {
+    width: 100px;
+    height: 100px;
+  }
+
+  .frame .text-wrapper-3 {
+    font-size: 88px;
+  }
+
+  .frame .eos-icons-admin,
+  .frame .eos-icons-admin-2 {
+    top: 1024px;
+    width: 1920px;
+  }
+}
+
+/* 2560x1440 (QHD) */
+@media screen and (min-width: 2560px) and (max-width: 2561px) and (max-height: 1441px) {
+  .frame {
+    width: 2560px;
+    min-height: 1440px;
+  }
+
+  .frame .image {
+    width: 2560px;
+    height: 1440px;
+  }
+
+  .frame .div {
+    top: 500px;
+    left: 1000px;
+    width: 560px;
+    height: 462px;
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    width: 532px;
+    height: 80px;
+  }
+
+  .frame .div-wrapper-3 {
+    width: 532px;
+    height: 70px;
+  }
+
+  .frame .text-wrapper {
+    font-size: 28px;
+  }
+
+  .frame .text-wrapper-2 {
+    font-size: 28px;
+  }
+
+  .frame .div-2 {
+    top: 250px;
+    left: 500px;
+    width: 1560px;
+  }
+
+  .frame .mdi-map-marker {
+    width: 120px;
+    height: 120px;
+  }
+
+  .frame .text-wrapper-3 {
+    font-size: 104px;
+  }
+
+  .frame .eos-icons-admin,
+  .frame .eos-icons-admin-2 {
+    top: 1384px;
+    width: 2560px;
+  }
+}
