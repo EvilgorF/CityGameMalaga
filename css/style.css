@@ -1,1436 +1,382 @@
-﻿.frame {
-  background-color: #ffffff;
-  width: 100%;
-  min-width: 360px;
-  min-height: 640px;
-  position: relative;
+﻿/* Mobile App-like CSS voor alle mobiele formaten */
+
+/* Reset en basis styling */
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: "Montserrat-SemiBold", Helvetica, Arial, sans-serif;
+  background: #ffffff;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* Safe areas voor notched devices */
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* App container */
+.frame {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Achtergrond afbeelding */
 .frame .image {
   position: absolute;
   top: 0;
   left: 0;
-  width: 360px;
-  height: 640px;
-  aspect-ratio: 0.67;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  z-index: 1;
 }
 
-.frame .div {
-  position: absolute;
-  top: 257px;
-  left: 63px;
-  width: 245px;
-  height: 202px;
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.frame .div-wrapper {
-  display: flex;
-  margin-left: 14px;
-  width: 217px;
-  height: 45px;
-  position: relative;
-  margin-top: 21px;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid;
-  border-color: #3c3c4399;
-}
-
-.frame .text-wrapper {
-  position: relative;
-  width: fit-content;
-  margin-top: -0.50px;
-  font-family: "Montserrat-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #3c3c4399;
-  font-size: 19px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: normal;
-}
-
-.frame .div-wrapper-2 {
-  display: flex;
-  margin-left: 14px;
-  width: 217px;
-  height: 45px;
-  position: relative;
-  margin-top: 13px;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid;
-  border-color: #3c3c4399;
-}
-
-.frame .div-wrapper-3 {
-  display: flex;
-  height: 42px;
-  width: 215px;
-  align-self: center;
-  position: relative;
-  margin-top: 14px;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background-color: #d1030b;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0px 4px 4px #00000040;
-}
-
-.frame .text-wrapper-2 {
-  position: relative;
-  width: fit-content;
-  margin-top: -1.00px;
-  font-family: "Montserrat-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #ffffff;
-  font-size: 18px;
-  letter-spacing: 0;
-  line-height: normal;
-}
-
+/* Header sectie */
 .frame .div-2 {
-  position: absolute;
-  top: 141px;
-  left: 34px;
-  width: 274px;
-  height: 49px;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5vh 5vw;
+  min-height: 12vh;
 }
 
 .frame .mdi-map-marker {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 38px;
-  height: 44px;
-  aspect-ratio: 1;
+  width: 8vw;
+  height: 8vw;
+  max-width: 40px;
+  max-height: 40px;
+  margin-right: 3vw;
 }
 
 .frame .text-wrapper-3 {
-  position: absolute;
-  top: -5px;
-  left: 42px;
-  font-family: "Montserrat-Bold", Helvetica;
+  font-family: "Montserrat-Bold", Helvetica, Arial, sans-serif;
   font-weight: 700;
   color: #ffffff;
-  font-size: 40px;
-  letter-spacing: 0;
-  line-height: normal;
+  font-size: clamp(6vw, 8vh, 40px);
+  line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .frame .div-3 {
   position: absolute;
-  top: 47px;
-  left: 14px;
-  width: 258px;
-  height: 2px;
-  border: 1px dashed;
-  border-color: #3c3c4399;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.6);
 }
 
-.frame .eos-icons-admin {
-  position: absolute;
-  top: 584px;
-  left: 0;
-  width: 360px;
-  height: 56px;
-  display: flex;
-  gap: 30px;
-  background-color: #ffffff;
-}
-
-.frame .div-4 {
-  display: inline-flex;
-  width: 46px;
-  height: 56px;
-  position: relative;
-  margin-left: 55px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px;
-}
-
-.frame .vector-wrapper {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  margin-top: -2.00px;
-  aspect-ratio: 1;
-}
-
-.frame .vector {
-  position: absolute;
-  width: 91.67%;
-  height: 91.67%;
-  top: 8.33%;
-  left: 8.33%;
-}
-
-.frame .text-wrapper-4 {
-  position: relative;
-  width: fit-content;
-  margin-bottom: -1.00px;
-  font-family: "Montserrat-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #3c3c4399;
-  font-size: 10px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.frame .div-5 {
-  width: 97px;
-  display: inline-flex;
-  height: 56px;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px;
-}
-
-.frame .img {
-  position: absolute;
-  width: 91.67%;
-  height: 83.33%;
-  top: 16.67%;
-  left: 8.33%;
-}
-
-.frame .text-wrapper-5 {
-  position: relative;
-  width: fit-content;
-  margin-bottom: -1.00px;
-  font-family: "Montserrat-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #000000;
-  font-size: 10px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.frame .div-6 {
-  display: inline-flex;
-  width: 57px;
-  height: 56px;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px;
-}
-
-.frame .vector-2 {
-  position: absolute;
-  width: 87.50%;
-  height: 95.83%;
-  top: 4.17%;
-  left: 12.50%;
-}
-
-.frame .eos-icons-admin-2 {
-  position: absolute;
-  top: 584px;
-  left: 0;
-  width: 360px;
-  height: 56px;
-  display: flex;
-  background-color: #ffffff;
-}
-
-.frame .div-7 {
-  width: 46px;
-  margin-left: 26px;
-  display: inline-flex;
-  height: 56px;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px;
-}
-
-.frame .div-8 {
-  width: 97px;
-  margin-left: 53px;
-  display: inline-flex;
-  height: 56px;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px;
-}
-
-.frame .div-9 {
-  display: inline-flex;
-  width: 57px;
-  height: 56px;
-  position: relative;
-  margin-left: 54px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px;
-}
-/* =============================================
-   ORIGINAL CSS INJECTED BELOW
-   ============================================= */
-
-.frame {
-  background-color: #ffffff;
-  width: 100%;
-  min-width: 360px;
-  min-height: 640px;
-  position: relative;
-}
-
-.frame .image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 360px;
-  height: 640px;
-  aspect-ratio: 0.67;
-  object-fit: cover;
-}
-
+/* Login formulier */
 .frame .div {
-  position: absolute;
-  top: 257px;
-  left: 63px;
-  width: 245px;
-  height: 202px;
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-/* Login form resets to preserve layout */
-.frame .login-form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
-}
-
-.frame .div-wrapper {
-  display: flex;
-  margin-left: 14px;
-  width: 217px;
-  height: 45px;
   position: relative;
-  margin-top: 21px;
+  z-index: 3;
+  margin: 5vh auto;
+  width: min(85vw, 300px);
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+  padding: 6vw;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Input velden */
+.frame .div-wrapper,
+.frame .div-wrapper-2 {
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid;
-  border-color: #3c3c4399;
+  width: 100%;
+  height: 12vw;
+  min-height: 45px;
+  padding: 0 4vw;
+  border-radius: 12px;
+  border: 1px solid rgba(60, 60, 67, 0.3);
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: all 0.2s ease;
 }
 
-/* Shared text-wrapper style for inputs */
+.frame .div-wrapper:focus-within,
+.frame .div-wrapper-2:focus-within {
+  border-color: #007aff;
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+}
+
+/* Input styling */
 .frame .text-wrapper {
-  position: relative;
   width: 100%;
   height: 100%;
-  margin-top: -0.50px;
-  font-family: "Montserrat-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #3c3c4399;
-  font-size: 19px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: normal;
-  background: none;
   border: none;
+  background: transparent;
+  font-size: clamp(16px, 4.5vw, 20px);
+  color: #3c3c4399;
+  text-align: center;
   outline: none;
-  padding: 0;
-  cursor: text;
+  font-family: "Montserrat-SemiBold", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
 }
 
-/* Placeholder styling for inputs */
 .frame .text-wrapper::placeholder {
   color: #3c3c4399;
-  font-family: "Montserrat-SemiBold", Helvetica;
-  font-weight: 600;
-  font-size: 19px;
-  text-align: center;
+  opacity: 0.7;
 }
 
-.frame .div-wrapper-2 {
-  display: flex;
-  margin-left: 14px;
-  width: 217px;
-  height: 45px;
-  position: relative;
-  margin-top: 13px;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid;
-  border-color: #3c3c4399;
-}
-
+/* Submit button */
 .frame .div-wrapper-3 {
   display: flex;
-  height: 42px;
-  width: 215px;
-  align-self: center;
-  position: relative;
-  margin-top: 14px;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
+  width: 100%;
+  height: 12vw;
+  min-height: 45px;
+  padding: 0 4vw;
   background-color: #d1030b;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0px 4px 4px #00000040;
-}
-
-/* Submit button resets */
-.frame .text-wrapper-2 {
-  position: relative;
-  width: fit-content;
-  margin-top: -1.00px;
-  font-family: "Montserrat-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #ffffff;
-  font-size: 18px;
-  letter-spacing: 0;
-  line-height: normal;
-  background: none;
-  border: none;
-  outline: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(209, 3, 11, 0.3);
+  transition: all 0.2s ease;
   cursor: pointer;
-  padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.frame .div-2 {
-  position: absolute;
-  top: 141px;
-  left: 34px;
-  width: 274px;
-  height: 49px;
+.frame .div-wrapper-3:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(209, 3, 11, 0.4);
 }
 
-.frame .mdi-map-marker {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 38px;
-  height: 44px;
-  aspect-ratio: 1;
-}
-
-.frame .text-wrapper-3 {
-  position: absolute;
-  top: -5px;
-  left: 42px;
-  font-family: "Montserrat-Bold", Helvetica;
-  font-weight: 700;
+.frame .text-wrapper-2 {
+  width: 100%;
+  border: none;
+  background: transparent;
   color: #ffffff;
-  font-size: 40px;
-  letter-spacing: 0;
-  line-height: normal;
-  margin: 0;
+  font-size: clamp(16px, 4.5vw, 20px);
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  font-family: "Montserrat-SemiBold", Helvetica, Arial, sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
-.frame .div-3 {
-  position: absolute;
-  top: 47px;
-  left: 14px;
-  width: 258px;
-  height: 2px;
-  border: 1px dashed;
-  border-color: #3c3c4399;
-}
-
-.frame .eos-icons-admin {
-  position: absolute;
-  top: 584px;
+/* Navigation bar */
+.frame .eos-icons-admin,
+.frame .eos-icons-admin-2 {
+  position: fixed;
+  bottom: 0;
   left: 0;
-  width: 360px;
-  height: 56px;
+  right: 0;
+  z-index: 4;
   display: flex;
-  gap: 30px;
-  background-color: #ffffff;
+  justify-content: space-around;
+  align-items: center;
+  height: 12vh;
+  min-height: 60px;
+  padding: 0 2vw;
+  padding-bottom: env(safe-area-inset-bottom);
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1);
 }
 
-.frame .div-4 {
-  display: inline-flex;
-  width: 46px;
-  height: 56px;
-  position: relative;
-  margin-left: 55px;
+.frame .div-4,
+.frame .div-5,
+.frame .div-6,
+.frame .div-7,
+.frame .div-8,
+.frame .div-9 {
+  display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 10px;
+  gap: 1vh;
+  min-width: 0;
+  padding: 1vh 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.2s ease;
 }
 
-.frame .vector-wrapper {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  margin-top: -2.00px;
-  aspect-ratio: 1;
+.frame .div-4:active,
+.frame .div-5:active,
+.frame .div-6:active,
+.frame .div-7:active,
+.frame .div-8:active,
+.frame .div-9:active {
+  opacity: 0.6;
 }
 
-.frame .vector {
-  position: absolute;
-  width: 91.67%;
-  height: 91.67%;
-  top: 8.33%;
-  left: 8.33%;
+.frame .vector-wrapper,
+.frame .img,
+.frame .vector-2 {
+  width: 6vw;
+  height: 6vw;
+  max-width: 28px;
+  max-height: 28px;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.frame .vector,
+.frame .img,
+.frame .vector-2 {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.frame .text-wrapper-4,
+.frame .text-wrapper-5 {
+  font-size: clamp(10px, 2.5vw, 12px);
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .frame .text-wrapper-4 {
-  position: relative;
-  width: fit-content;
-  margin-bottom: -1.00px;
-  font-family: "Montserrat-SemiBold", Helvetica;
-  font-weight: 600;
   color: #3c3c4399;
-  font-size: 10px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.frame .div-5 {
-  width: 97px;
-  display: inline-flex;
-  height: 56px;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px;
-}
-
-.frame .img {
-  position: absolute;
-  width: 91.67%;
-  height: 83.33%;
-  top: 16.67%;
-  left: 8.33%;
 }
 
 .frame .text-wrapper-5 {
-  position: relative;
-  width: fit-content;
-  margin-bottom: -1.00px;
-  font-family: "Montserrat-SemiBold", Helvetica;
-  font-weight: 600;
   color: #000000;
-  font-size: 10px;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
 }
 
-.frame .div-6 {
-  display: inline-flex;
-  width: 57px;
-  height: 56px;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px;
+/* Verberg duplicate navigation */
+.eos-icons-admin-2 {
+  display: none;
 }
 
-.frame .vector-2 {
-  position: absolute;
-  width: 87.50%;
-  height: 95.83%;
-  top: 4.17%;
-  left: 12.50%;
+/* Focus states voor accessibility */
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #007aff;
+  outline-offset: 2px;
 }
 
-.frame .eos-icons-admin-2 {
-  position: absolute;
-  top: 584px;
-  left: 0;
-  width: 360px;
-  height: 56px;
-  display: flex;
-  background-color: #ffffff;
-}
-
-.frame .div-7 {
-  width: 46px;
-  margin-left: 26px;
-  display: inline-flex;
-  height: 56px;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px;
-}
-
-.frame .div-8 {
-  width: 97px;
-  margin-left: 53px;
-  display: inline-flex;
-  height: 56px;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px;
-}
-
-.frame .div-9 {
-  display: inline-flex;
-  width: 57px;
-  height: 56px;
-  position: relative;
-  margin-left: 54px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 10px;
-}
-
-/* Visually hidden utility for screen-reader-only labels */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-/* Media Queries voor verschillende apparaten */
-
-/* Extra kleine apparaten (kleine telefoons, <576px) - bijv. iPhone SE (375px) */
-@media screen and (max-width: 575px) {
-  .frame {
-    min-width: 320px;
-    min-height: 568px;
-  }
-
-  .frame .image {
-    width: 100%;
-    height: 100%;
-    max-width: 375px;
-    max-height: 667px;
-  }
-
+/* Landscape orientation aanpassingen */
+@media screen and (orientation: landscape) and (max-height: 500px) {
   .frame .div {
-    top: 220px;
-    left: 37px;
-    width: 280px;
-    height: 180px;
-  }
-
-  .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 250px;
-    margin-left: 10px;
-  }
-
-  .frame .div-wrapper-3 {
-    width: 250px;
-  }
-
-  .frame .text-wrapper {
-    font-size: 16px;
-  }
-
-  .frame .text-wrapper-2 {
-    font-size: 16px;
+    margin: 2vh auto;
+    padding: 4vw;
+    width: min(70vw, 280px);
   }
 
   .frame .div-2 {
-    top: 120px;
-    left: 30px;
-    width: 315px;
+    padding: 2vh 5vw;
+    min-height: 8vh;
   }
 
   .frame .text-wrapper-3 {
-    font-size: 32px;
+    font-size: clamp(4vw, 6vh, 32px);
   }
 
-  .frame .eos-icons-admin,
-  .frame .eos-icons-admin-2 {
-    top: 520px;
-    width: 100%;
-    height: 48px;
-  }
-
-  .frame .div-4,
-  .frame .div-5,
-  .frame .div-6,
-  .frame .div-7,
-  .frame .div-8,
-  .frame .div-9 {
-    height: 48px;
-    padding: 8px;
-  }
-
-  .frame .text-wrapper-4,
-  .frame .text-wrapper-5 {
-    font-size: 9px;
+  .frame .eos-icons-admin {
+    height: 10vh;
+    min-height: 50px;
   }
 }
 
-/* Kleine apparaten (telefoons, 576px - 767px) - bijv. iPhone 12 (390px), Pixel 5 (393px) */
-@media screen and (min-width: 576px) and (max-width: 767px) {
-  .frame {
-    min-width: 360px;
-    min-height: 640px;
-  }
-
-  .frame .image {
-    width: 360px;
-    height: 640px;
-  }
-
+/* Extra kleine schermen (<360px) */
+@media screen and (max-width: 359px) {
   .frame .div {
-    top: 257px;
-    left: 63px;
-    width: 245px;
-    height: 202px;
+    width: min(90vw, 280px);
+    padding: 5vw;
+    gap: 2vh;
   }
 
   .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 217px;
-    margin-left: 14px;
-  }
-
+  .frame .div-wrapper-2,
   .frame .div-wrapper-3 {
-    width: 215px;
-  }
-
-  .frame .text-wrapper {
-    font-size: 18px;
-  }
-
-  .frame .text-wrapper-2 {
-    font-size: 18px;
-  }
-
-  .frame .div-2 {
-    top: 141px;
-    left: 34px;
-    width: 274px;
-  }
-
-  .frame .text-wrapper-3 {
-    font-size: 36px;
-  }
-
-  .frame .eos-icons-admin,
-  .frame .eos-icons-admin-2 {
-    top: 584px;
-    width: 360px;
-    height: 56px;
-  }
-
-  .frame .text-wrapper-4,
-  .frame .text-wrapper-5 {
-    font-size: 10px;
-  }
-}
-
-/* Middelgrote apparaten (tablets, 768px - 991px) - bijv. iPad Mini (768px), iPad (810px) */
-@media screen and (min-width: 768px) and (max-width: 991px) {
-  .frame {
-    width: 768px;
-    min-height: 1024px;
-  }
-
-  .frame .image {
-    width: 768px;
-    height: 1024px;
-  }
-
-  .frame .div {
-    top: 400px;
-    left: 200px;
-    width: 368px;
-    height: 304px;
-  }
-
-  .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 340px;
-    height: 60px;
-    margin-left: 14px;
-    margin-top: 25px;
-  }
-
-  .frame .div-wrapper-3 {
-    width: 340px;
-    height: 50px;
-    margin-top: 20px;
-  }
-
-  .frame .text-wrapper {
-    font-size: 20px;
-  }
-
-  .frame .text-wrapper-2 {
-    font-size: 20px;
-  }
-
-  .frame .div-2 {
-    top: 200px;
-    left: 100px;
-    width: 568px;
-  }
-
-  .frame .mdi-map-marker {
-    width: 50px;
     height: 50px;
   }
 
-  .frame .text-wrapper-3 {
-    font-size: 48px;
-  }
-
-  .frame .eos-icons-admin,
-  .frame .eos-icons-admin-2 {
-    top: 968px;
-    width: 768px;
-    height: 56px;
-  }
-
-  .frame .div-4,
-  .frame .div-5,
-  .frame .div-6,
-  .frame .div-7,
-  .frame .div-8,
-  .frame .div-9 {
-    height: 56px;
-    padding: 10px;
-  }
-
-  .frame .text-wrapper-4,
-  .frame .text-wrapper-5 {
-    font-size: 12px;
+  .frame .text-wrapper,
+  .frame .text-wrapper-2 {
+    font-size: 16px;
   }
 }
 
-/* Grote apparaten (laptops, 992px - 1199px) - bijv. MacBook Air (1280px), standaard laptops */
-@media screen and (min-width: 992px) and (max-width: 1199px) {
-  .frame {
-    width: 992px;
-    min-height: 1200px;
-  }
-
-  .frame .image {
-    width: 992px;
-    height: 1200px;
-  }
-
+/* Grote telefoons (>414px) */
+@media screen and (min-width: 415px) {
   .frame .div {
-    top: 500px;
-    left: 300px;
-    width: 392px;
-    height: 324px;
+    width: min(80vw, 320px);
+    padding: 7vw;
   }
 
   .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 364px;
-    height: 65px;
-    margin-left: 14px;
-    margin-top: 30px;
-  }
-
+  .frame .div-wrapper-2,
   .frame .div-wrapper-3 {
-    width: 364px;
     height: 55px;
-    margin-top: 25px;
+  }
+
+  .frame .text-wrapper,
+  .frame .text-wrapper-2 {
+    font-size: 18px;
+  }
+}
+
+/* iPhone X en nieuwer (safe area support) */
+@supports (padding: max(0px)) {
+  .frame .eos-icons-admin {
+    padding-bottom: max(2vh, env(safe-area-inset-bottom));
+  }
+}
+
+/* Dark mode support (indien gewenst) */
+@media (prefers-color-scheme: dark) {
+  .frame .div {
+    background-color: rgba(28, 28, 30, 0.9);
+  }
+
+  .frame .div-wrapper,
+  .frame .div-wrapper-2 {
+    background-color: rgba(44, 44, 46, 0.9);
+    border-color: rgba(84, 84, 88, 0.6);
   }
 
   .frame .text-wrapper {
-    font-size: 22px;
+    color: #ffffff;
   }
 
-  .frame .text-wrapper-2 {
-    font-size: 22px;
-  }
-
-  .frame .div-2 {
-    top: 250px;
-    left: 150px;
-    width: 692px;
-  }
-
-  .frame .mdi-map-marker {
-    width: 60px;
-    height: 60px;
-  }
-
-  .frame .text-wrapper-3 {
-    font-size: 56px;
-  }
-
-  .frame .eos-icons-admin,
-  .frame .eos-icons-admin-2 {
-    top: 1144px;
-    width: 992px;
-    height: 56px;
-  }
-
-  .frame .text-wrapper-4,
-  .frame .text-wrapper-5 {
-    font-size: 14px;
+  .frame .text-wrapper::placeholder {
+    color: rgba(255, 255, 255, 0.6);
   }
 }
 
-/* Extra grote apparaten (desktops, >=1200px) - bijv. Full HD (1920px), 4K schermen */
-@media screen and (min-width: 1200px) {
-  .frame {
-    width: 1200px;
-    min-height: 1400px;
-  }
-
-  .frame .image {
-    width: 1200px;
-    height: 1400px;
-  }
-
-  .frame .div {
-    top: 600px;
-    left: 400px;
-    width: 400px;
-    height: 330px;
-  }
-
-  .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 372px;
-    height: 70px;
-    margin-left: 14px;
-    margin-top: 35px;
-  }
-
-  .frame .div-wrapper-3 {
-    width: 372px;
-    height: 60px;
-    margin-top: 30px;
-  }
-
-  .frame .text-wrapper {
-    font-size: 24px;
-  }
-
-  .frame .text-wrapper-2 {
-    font-size: 24px;
-  }
-
-  .frame .div-2 {
-    top: 300px;
-    left: 200px;
-    width: 800px;
-  }
-
-  .frame .mdi-map-marker {
-    width: 70px;
-    height: 70px;
-  }
-
-  .frame .text-wrapper-3 {
-    font-size: 64px;
-  }
-
-  .frame .eos-icons-admin,
-  .frame .eos-icons-admin-2 {
-    top: 1344px;
-    width: 1200px;
-    height: 56px;
-  }
-
-  .frame .text-wrapper-4,
-  .frame .text-wrapper-5 {
-    font-size: 16px;
-  }
-}
-
-/* Specifieke aanpassingen voor populaire telefoonmodellen */
-
-/* iPhone SE (375px breedte) */
-@media screen and (max-width: 375px) {
-  .frame {
-    min-width: 320px;
-    min-height: 568px;
-  }
-
-  .frame .image {
-    width: 375px;
-    height: 667px;
-  }
-
-  .frame .div {
-    top: 230px;
-    left: 40px;
-    width: 295px;
-    height: 190px;
-  }
-
-  .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 267px;
-  }
-
-  .frame .div-wrapper-3 {
-    width: 267px;
-  }
-}
-
-/* iPhone 12/13/14 (390px breedte) */
-@media screen and (min-width: 390px) and (max-width: 393px) {
-  .frame .image {
-    width: 390px;
-    height: 844px;
-  }
-
-  .frame .div {
-    top: 270px;
-    left: 50px;
-    width: 290px;
-    height: 210px;
-  }
-
-  .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 262px;
-  }
-
-  .frame .div-wrapper-3 {
-    width: 262px;
-  }
-}
-
-/* iPhone 14 Pro Max (428px breedte) */
-@media screen and (min-width: 428px) and (max-width: 431px) {
-  .frame .image {
-    width: 428px;
-    height: 926px;
-  }
-
-  .frame .div {
-    top: 290px;
-    left: 60px;
-    width: 308px;
-    height: 220px;
-  }
-
-  .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 280px;
-  }
-
-  .frame .div-wrapper-3 {
-    width: 280px;
-  }
-}
-
-/* Samsung Galaxy S21 (360px breedte) */
-@media screen and (max-width: 360px) {
-  .frame {
-    min-width: 320px;
-    min-height: 640px;
-  }
-
-  .frame .image {
-    width: 360px;
-    height: 640px;
-  }
-
-  .frame .div {
-    top: 220px;
-    left: 35px;
-    width: 290px;
-    height: 180px;
-  }
-
-  .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 262px;
-  }
-
-  .frame .div-wrapper-3 {
-    width: 262px;
-  }
-}
-
-/* Pixel 5 (393px breedte) */
-@media screen and (min-width: 393px) and (max-width: 395px) {
-  .frame .image {
-    width: 393px;
-    height: 851px;
-  }
-
-  .frame .div {
-    top: 280px;
-    left: 55px;
-    width: 283px;
-    height: 205px;
-  }
-
-  .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 255px;
-  }
-
-  .frame .div-wrapper-3 {
-    width: 255px;
-  }
-}
-
-/* Laptops en PC's - specifieke resoluties */
-
-/* 1024x768 (oude laptops) */
-@media screen and (min-width: 1024px) and (max-width: 1025px) and (max-height: 769px) {
-  .frame {
-    width: 1024px;
-    min-height: 768px;
-  }
-
-  .frame .image {
-    width: 1024px;
-    height: 768px;
-  }
-
-  .frame .div {
-    top: 300px;
-    left: 250px;
-    width: 524px;
-    height: 432px;
-  }
-
-  .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 496px;
-    height: 80px;
-  }
-
-  .frame .div-wrapper-3 {
-    width: 496px;
-    height: 70px;
-  }
-
-  .frame .text-wrapper {
-    font-size: 26px;
-  }
-
-  .frame .text-wrapper-2 {
-    font-size: 26px;
-  }
-
-  .frame .div-2 {
-    top: 150px;
-    left: 125px;
-    width: 774px;
-  }
-
-  .frame .mdi-map-marker {
-    width: 80px;
-    height: 80px;
-  }
-
-  .frame .text-wrapper-3 {
-    font-size: 72px;
-  }
-
-  .frame .eos-icons-admin,
-  .frame .eos-icons-admin-2 {
-    top: 712px;
-    width: 1024px;
-  }
-}
-
-/* 1366x768 (standaard laptops) */
-@media screen and (min-width: 1366px) and (max-width: 1367px) and (max-height: 769px) {
-  .frame {
-    width: 1366px;
-    min-height: 768px;
-  }
-
-  .frame .image {
-    width: 1366px;
-    height: 768px;
-  }
-
-  .frame .div {
-    top: 250px;
-    left: 400px;
-    width: 566px;
-    height: 468px;
-  }
-
-  .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 538px;
-    height: 85px;
-  }
-
-  .frame .div-wrapper-3 {
-    width: 538px;
-    height: 75px;
-  }
-
-  .frame .text-wrapper {
-    font-size: 28px;
-  }
-
-  .frame .text-wrapper-2 {
-    font-size: 28px;
-  }
-
-  .frame .div-2 {
-    top: 100px;
-    left: 200px;
-    width: 966px;
-  }
-
-  .frame .mdi-map-marker {
-    width: 90px;
-    height: 90px;
-  }
-
-  .frame .text-wrapper-3 {
-    font-size: 80px;
-  }
-
-  .frame .eos-icons-admin,
-  .frame .eos-icons-admin-2 {
-    top: 712px;
-    width: 1366px;
-  }
-}
-
-/* 1440x900 (MacBook Pro 15") */
-@media screen and (min-width: 1440px) and (max-width: 1441px) and (max-height: 901px) {
-  .frame {
-    width: 1440px;
-    min-height: 900px;
-  }
-
-  .frame .image {
-    width: 1440px;
-    height: 900px;
-  }
-
-  .frame .div {
-    top: 300px;
-    left: 450px;
-    width: 540px;
-    height: 446px;
-  }
-
-  .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 512px;
-    height: 80px;
-  }
-
-  .frame .div-wrapper-3 {
-    width: 512px;
-    height: 70px;
-  }
-
-  .frame .text-wrapper {
-    font-size: 26px;
-  }
-
-  .frame .text-wrapper-2 {
-    font-size: 26px;
-  }
-
-  .frame .div-2 {
-    top: 150px;
-    left: 225px;
-    width: 990px;
-  }
-
-  .frame .mdi-map-marker {
-    width: 85px;
-    height: 85px;
-  }
-
-  .frame .text-wrapper-3 {
-    font-size: 76px;
-  }
-
-  .frame .eos-icons-admin,
-  .frame .eos-icons-admin-2 {
-    top: 844px;
-    width: 1440px;
-  }
-}
-
-/* 1920x1080 (Full HD) */
-@media screen and (min-width: 1920px) and (max-width: 1921px) and (max-height: 1081px) {
-  .frame {
-    width: 1920px;
-    min-height: 1080px;
-  }
-
-  .frame .image {
-    width: 1920px;
-    height: 1080px;
-  }
-
-  .frame .div {
-    top: 400px;
-    left: 700px;
-    width: 520px;
-    height: 430px;
-  }
-
-  .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 492px;
-    height: 75px;
-  }
-
-  .frame .div-wrapper-3 {
-    width: 492px;
-    height: 65px;
-  }
-
-  .frame .text-wrapper {
-    font-size: 24px;
-  }
-
-  .frame .text-wrapper-2 {
-    font-size: 24px;
-  }
-
-  .frame .div-2 {
-    top: 200px;
-    left: 350px;
-    width: 1220px;
-  }
-
-  .frame .mdi-map-marker {
-    width: 100px;
-    height: 100px;
-  }
-
-  .frame .text-wrapper-3 {
-    font-size: 88px;
-  }
-
-  .frame .eos-icons-admin,
-  .frame .eos-icons-admin-2 {
-    top: 1024px;
-    width: 1920px;
-  }
-}
-
-/* 2560x1440 (QHD) */
-@media screen and (min-width: 2560px) and (max-width: 2561px) and (max-height: 1441px) {
-  .frame {
-    width: 2560px;
-    min-height: 1440px;
-  }
-
-  .frame .image {
-    width: 2560px;
-    height: 1440px;
-  }
-
-  .frame .div {
-    top: 500px;
-    left: 1000px;
-    width: 560px;
-    height: 462px;
-  }
-
-  .frame .div-wrapper,
-  .frame .div-wrapper-2 {
-    width: 532px;
-    height: 80px;
-  }
-
-  .frame .div-wrapper-3 {
-    width: 532px;
-    height: 70px;
-  }
-
-  .frame .text-wrapper {
-    font-size: 28px;
-  }
-
-  .frame .text-wrapper-2 {
-    font-size: 28px;
-  }
-
-  .frame .div-2 {
-    top: 250px;
-    left: 500px;
-    width: 1560px;
-  }
-
-  .frame .mdi-map-marker {
-    width: 120px;
-    height: 120px;
-  }
-
-  .frame .text-wrapper-3 {
-    font-size: 104px;
-  }
-
-  .frame .eos-icons-admin,
-  .frame .eos-icons-admin-2 {
-    top: 1384px;
-    width: 2560px;
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
   }
 }
