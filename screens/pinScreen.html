@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>City Game</title>
+    <link rel="stylesheet" href="css/globals.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main class="frame">
+      <!-- Background images layered for visual effect -->
+      <img class="image" src="img/Achtergrond.png" alt="" aria-hidden="true" />
+      <img class="image" src="img/Achtergrond.png" alt="" aria-hidden="true" />
+      <img class="image" src="img/Achtergrond.png" alt="" aria-hidden="true" />
+      <!-- Login form card -->
+      <section class="div" aria-label="Inlogformulier">
+        <form class="login-form" novalidate>
+          <div class="div-wrapper">
+            <label for="team-name" class="sr-only">Team-Name</label>
+            <input
+              id="team-name"
+              class="text-wrapper"
+              type="text"
+              placeholder="Team-Name"
+              autocomplete="off"
+              aria-label="Team naam invoeren"
+            />
+          </div>
+          <div class="div-wrapper-2">
+            <label for="spel-pin" class="sr-only">Spel-PIN</label>
+            <input
+              id="spel-pin"
+              class="text-wrapper"
+              type="password"
+              placeholder="Spel-PIN"
+              autocomplete="off"
+              inputmode="numeric"
+              aria-label="Spel PIN invoeren"
+            />
+          </div>
+          <div class="div-wrapper-3">
+            <button type="submit" class="text-wrapper-2">Bevestigen</button>
+          </div>
+        </form>
+      </section>
+      <!-- City Game header with location marker -->
+      <header class="div-2" aria-label="City Game header">
+        <img class="mdi-map-marker" src="img/mdi_map-marker.png" alt="Locatie marker" />
+        <h1 class="text-wrapper-3">CITY GAME</h1>
+        <div class="div-3" role="separator" aria-hidden="true"></div>
+      </header>
+      <!-- Bottom navigation bar - variant 1 (SVG icons) -->
+      <nav class="eos-icons-admin" aria-label="Hoofdnavigatie">
+        <div class="div-4">
+          <div class="vector-wrapper" aria-hidden="true">
+            <img class="vector" src="img/vector.svg" alt="" />
+          </div>
+          <span class="text-wrapper-4">INFO</span>
+        </div>
+        <div class="div-5">
+          <div class="vector-wrapper" aria-hidden="true">
+            <img class="img" src="img/image.svg" alt="" />
+          </div>
+          <span class="text-wrapper-5">PIN INVOEREN</span>
+        </div>
+        <div class="div-6">
+          <div class="vector-wrapper" aria-hidden="true">
+            <img class="vector-2" src="img/vector-2.svg" alt="" />
+          </div>
+          <span class="text-wrapper-4">ADMIN</span>
+        </div>
+      </nav>
+      <!-- Bottom navigation bar - variant 2 (PNG icons) -->
+      <nav class="eos-icons-admin-2" aria-label="Hoofdnavigatie alternatief">
+        <div class="div-7">
+          <img class="vector-wrapper" src="img/material-symbols_info.png" alt="Info icoon" />
+          <span class="text-wrapper-4">INFO</span>
+        </div>
+        <div class="div-8">
+          <img class="vector-wrapper" src="img/material-symbols_pin.png" alt="PIN invoeren icoon" />
+          <span class="text-wrapper-5">PIN INVOEREN</span>
+        </div>
+        <div class="div-9">
+          <img class="vector-wrapper" src="img/eos-icons_admin.png" alt="Admin icoon" />
+          <span class="text-wrapper-4">ADMIN</span>
+        </div>
+      </nav>
+    </main>
+  </body>
+</html>
