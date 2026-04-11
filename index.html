@@ -1,89 +1,76 @@
 <!DOCTYPE html>
 <html lang="nl">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="City Game" />
-    <meta name="theme-color" content="#d1030b" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta charset="utf-8" />
-    <title>City Game</title>
-    <link rel="stylesheet" href="css/globals.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="apple-touch-icon" href="img/icon-192.png" />
-    <link rel="icon" href="img/icon-192.png" />
-  </head>
-  <body>
-    <main class="frame">
-      <!-- Achtergrond afbeelding -->
-      <img class="image" src="img/Achtergrond.png" alt="" aria-hidden="true" />
 
-      <!-- Header sectie -->
-      <header class="div-2" aria-label="City Game header">
-        <img class="mdi-map-marker" src="img/mdi_map-marker.png" alt="Locatie marker" />
-        <h1 class="text-wrapper-3">CITY GAME</h1>
-        <div class="div-3" role="separator" aria-hidden="true"></div>
-      </header>
+<head>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="City Game" />
+  <meta name="theme-color" content="#d1030b" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta charset="utf-8" />
+  <title>City Game</title>
+  <link rel="stylesheet" href="css/globals.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="apple-touch-icon" href="img/icon-192.png" />
+  <link rel="icon" href="img/icon-192.png" />
+</head>
 
-      <!-- Login formulier sectie -->
-      <section class="div" aria-label="Inlogformulier">
-        <form class="login-form" novalidate>
-          <div class="div-wrapper">
-            <label for="team-name" class="sr-only"></label>
-            <input
-              id="team-name"
-              class="text-wrapper"
-              type="text"
-              placeholder="Team-Name"
-              autocomplete="off"
-              aria-label="Team naam invoeren"
-              maxlength="20"
-              required
-            />
-          </div>
-          <div class="div-wrapper-2">
-            <label for="spel-pin" class="sr-only"></label>
-            <input
-              id="spel-pin"
-              class="text-wrapper"
-              type="text"
-              placeholder="Spel-PIN"
-              autocomplete="off"
-              inputmode="numeric"
-              aria-label="Spel PIN invoeren"
-              minlength="6"
-              maxlength="6"
-              required
-            />
-          </div>
-          <div class="div-wrapper-3">
-            <button type="submit" class="text-wrapper-2">Bevestigen</button>
-          </div>
-        </form>
-      </section>
+<body>
+  <main class="frame">
+    <!-- Achtergrond afbeelding -->
+    <img class="image" src="img/Achtergrond.png" alt="" aria-hidden="true" />
 
-      <!-- Navigation bar -->
-      <nav class="eos-icons-admin" aria-label="Hoofdnavigatie">
-        <div class="div-4">
-          <div class="vector-wrapper" aria-hidden="true">
-            <img class="vector" src="img/material-symbols_info.png" alt="" />
-          </div>
-          <span class="text-wrapper-4">INFO</span>
+    <!-- Header sectie -->
+    <header class="div-2" aria-label="City Game header">
+      <img class="mdi-map-marker" src="img/mdi_map-marker.png" alt="Locatie marker" />
+      <h1 class="text-wrapper-3">CITY GAME</h1>
+      <div class="div-3" role="separator" aria-hidden="true"></div>
+    </header>
+
+    <!-- Login formulier sectie -->
+    <section class="div" aria-label="Inlogformulier">
+      <form class="login-form" novalidate>
+        <div class="div-wrapper">
+          <label for="team-name" class="sr-only"></label>
+          <input id="team-name" class="text-wrapper" type="text" placeholder="Team-Name" autocomplete="off"
+            aria-label="Team naam invoeren" maxlength="20" required />
         </div>
-        <div class="div-5">
-          <div class="vector-wrapper" aria-hidden="true">
-            <img class="img" src="img/material-symbols_pin.png" alt="" />
-          </div>
-          <span class="text-wrapper-5">PIN INVOEREN</span>
+        <div class="div-wrapper-2">
+          <label for="spel-pin" class="sr-only"></label>
+          <input id="spel-pin" class="text-wrapper" type="text" placeholder="Spel-PIN" autocomplete="off"
+            inputmode="numeric" aria-label="Spel PIN invoeren" minlength="6" maxlength="6" required />
         </div>
-        <div class="div-6">
-          <div class="vector-wrapper" aria-hidden="true">
-            <img class="vector-2" src="img/eos-icons_admin.png" alt="" />
-          </div>
-          <span class="text-wrapper-4">ADMIN</span>
+        <div class="div-wrapper-3">
+          <button type="submit" class="text-wrapper-2">Bevestigen</button>
         </div>
-      </nav>
-    </main>
-  </body>
+      </form>
+    </section>
+
+    <!-- Navigation bar -->
+    <nav class="eos-icons-admin" aria-label="Hoofdnavigatie">
+      <div class="div-4" id="info">
+        <div class="vector-wrapper" aria-hidden="true">
+          <img class="vector" src="img/material-symbols_info.png" alt="" />
+        </div>
+        <span class="text-wrapper-4">INFO</span>
+      </div>
+      <div class="div-5" id="pin">
+        <div class="vector-wrapper" aria-hidden="true">
+          <img class="img" src="img/material-symbols_pin.png" alt="" />
+        </div>
+        <span class="text-wrapper-5">PIN INVOEREN</span>
+      </div>
+      <div class="div-6" id="admin">
+        <div class="vector-wrapper" aria-hidden="true">
+          <img class="vector-2" src="img/eos-icons_admin.png" alt="" />
+        </div>
+        <span class="text-wrapper-4">ADMIN</span>
+      </div>
+    </nav>
+  </main>
+  <script src="script/home.js"></script>
+</body>
+
 </html>
