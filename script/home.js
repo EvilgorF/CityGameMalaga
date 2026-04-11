@@ -1,7 +1,10 @@
-let url = window.location.origin
-if (url.includes(`github.io`)) {
-    url = `${window.location.origin}/CityGameMalaga`
+function url() {
+    let url = window.location.origin;
+    if (url.includes(`github.io`)) {
+        url += `/CityGameMalaga`
+    }
 }
+let url = url();
 document.getElementById("info").addEventListener("click", () => {
     window.location.href = `${url}/info.html`;
 });
