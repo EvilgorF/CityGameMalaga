@@ -1,5 +1,5 @@
 let url = window.location.origin
-if (url.includes(`github.com`)) {
+if (url.includes(`github.io`)) {
     url = `${window.location.origin}/CityGameMalaga`
 }
 document.getElementById("info").addEventListener("click", () => {
