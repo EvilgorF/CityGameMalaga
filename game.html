@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta charset="utf-8" />
+  <title>City Game – Spelen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      padding-top: calc(12px + env(safe-area-inset-top));
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .topbar-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .game-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .locations-found {
+      font-size: 12px;
+      font-weight: 600;
+      color: #888;
+    }
+
+    .timer {
+      font-size: 22px;
+      font-weight: 700;
+      color: #d1030b;
+    }
+
+    #map {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+
+    .wordbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px;
+      padding-bottom: calc(16px + env(safe-area-inset-bottom));
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .letter-box {
+      width: 40px;
+      height: 48px;
+      border-bottom: 3px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a1a;
+      transition: all 0.3s;
+    }
+
+    .letter-box.found {
+      border-color: #d1030b;
+      color: #d1030b;
+    }
+
+    .leaflet-popup-content-wrapper {
+      border-radius: 16px !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+      padding: 0 !important;
+      overflow: hidden;
+    }
+
+    .leaflet-popup-content {
+      margin: 0 !important;
+      width: 220px !important;
+    }
+
+    .popup-inner {
+      padding: 16px;
+    }
+
+    .popup-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+
+    .popup-desc {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .popup-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: #d1030b;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .popup-btn.completed {
+      background: #34c759;
+      cursor: default;
+    }
+
+    .custom-marker {
+      width: 36px;
+      height: 36px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      background: #d1030b;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .custom-marker.completed {
+      background: #34c759;
+    }
+
+    .custom-marker span {
+      transform: rotate(45deg);
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .player-marker {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #007aff;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 255, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="game-title">City Game</span>
+      <span class="locations-found" id="found-label">0 van 0 ontdekt</span>
+    </div>
+    <div class="timer" id="timer">--:--</div>
+  </div>
+
+  <div id="map"></div>
+  <div class="wordbar" id="wordbar"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // ── localStorage ipv sessionStorage ──
+    const gameId = localStorage.getItem('gameId');
+    const teamId = localStorage.getItem('teamId');
+    const teamName = localStorage.getItem('teamName');
+
+    if (!gameId) window.location.href = '/index.html';
+
+    let locations = [];
+    let completed = new Set();
+    let endTime = null;
+    let playerMarker = null;
+
+    const map = L.map('map', { zoomControl: false, attributionControl: false })
+      .setView([36.7213, -4.4193], 15);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    async function loadLocations() {
+      try {
+        const res = await fetch(`http://localhost:8080/api/game/${gameId}/locations`);
+        locations = await res.json();
+      } catch (e) {
+        console.error('Locaties laden mislukt', e);
+      }
+    }
+
+    async function loadProgress() {
+      if (!teamId) return;
+      try {
+        const res = await fetch(`http://localhost:8080/api/team/${teamId}/progress`);
+        const data = await res.json();
+
+        if (!Array.isArray(data)) return;
+
+        data.forEach(p => {
+          const loc = locations.find(l => l.taskId === p.taskId);
+          if (loc) completed.add(loc.id);
+        });
+      } catch (e) {
+        console.error('Progress laden mislukt', e);
+      }
+    }
+
+    // async function loadState() {
+    //   try {
+    //     const res = await fetch(`http://localhost:8080/api/game/${gameId}/state`);
+    //     const data = await res.json();
+    //     if (data.endTime) {
+    //       endTime = new Date(data.endTime);
+    //       startTimer();
+    //     }
+    //     if (data.status === 'FINISHED') window.location.href = '/index.html';
+    //   } catch (e) {
+    //     console.error('State laden mislukt', e);
+    //   }
+    // }
+
+    async function loadState() {
+      try {
+        const res = await fetch(`http://localhost:8080/api/game/${gameId}/state`);
+        const data = await res.json();
+
+        if (data.endTime) {
+          endTime = new Date(data.endTime);
+          console.log("END RAW:", data.endTime);
+          console.log("END DATE:", endTime);
+          startTimer();
+        }
+
+        if (event.status === 'FINISHED') {
+          if (event.winner) localStorage.setItem('winner', event.winner);
+          window.location.href = '/finish.html';
+        }
+      } catch (e) {
+        console.error('State laden mislukt', e);
+      }
+    }
+
+    function renderMarkers() {
+      map.eachLayer(layer => {
+        if (layer instanceof L.Marker) map.removeLayer(layer);
+      });
+
+      locations.forEach(loc => {
+        const isCompleted = completed.has(loc.id);
+
+        const icon = L.divIcon({
+          className: '',
+          html: `<div class="custom-marker ${isCompleted ? 'completed' : ''}">
+                   <span>${loc.character || '?'}</span>
+                 </div>`,
+          iconSize: [36, 36],
+          iconAnchor: [18, 36],
+          popupAnchor: [0, -36]
+        });
+
+        const marker = L.marker([loc.lat, loc.lng], { icon }).addTo(map);
+        marker.bindPopup(`
+          <div class="popup-inner">
+            <div class="popup-name">${loc.name}</div>
+            <div class="popup-desc">${loc.description || ''}</div>
+            <button class="popup-btn ${isCompleted ? 'completed' : ''}"
+                    onclick="openTask(${loc.id})"
+                    ${isCompleted ? 'disabled' : ''}>
+              ${isCompleted ? '✓ Voltooid' : 'Bekijken →'}
+            </button>
+          </div>
+        `, { closeButton: false });
+      });
+
+      if (playerMarker) playerMarker.addTo(map);
+    }
+
+    function renderWordBar() {
+      const wordbar = document.getElementById('wordbar');
+      wordbar.innerHTML = '';
+      locations.forEach(loc => {
+        const box = document.createElement('div');
+        box.className = 'letter-box' + (completed.has(loc.id) ? ' found' : '');
+        box.id = `letter-${loc.id}`;
+        box.textContent = completed.has(loc.id) ? (loc.character || '?') : '';
+        wordbar.appendChild(box);
+      });
+      document.getElementById('found-label').textContent =
+        `${completed.size} van ${locations.length} ontdekt`;
+    }
+
+    function openTask(locationId) {
+      localStorage.setItem('locationId', locationId); // localStorage
+      window.location.href = '/task.html';
+    }
+
+    // function startTimer() {
+    //   setInterval(() => {
+    //     if (!endTime) return;
+    //     const diff = endTime - new Date();
+    //     if (diff <= 0) {
+    //       document.getElementById('timer').textContent = '0:00:00';
+    //       window.location.href = '/index.html';
+    //       return;
+    //     }
+
+    //     const h = Math.floor(diff / 3600000);
+    //     const m = Math.floor((diff % 3600000) / 60000);
+    //     const s = Math.floor((diff % 60000) / 1000);
+
+    //     document.getElementById('timer').textContent =
+    //       `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    //   }, 1000);
+    // }
+
+    function startTimer() {
+      setInterval(() => {
+        if (!endTime) return;
+
+        const now = new Date();
+        const diff = endTime.getTime() - now.getTime();
+
+        if (diff <= 0) {
+          document.getElementById('timer').textContent = '0:00:00';
+          window.location.href = '/index.html';
+          return;
+        }
+
+        const totalSeconds = Math.floor(diff / 1000);
+
+        const h = Math.floor(totalSeconds / 3600);
+        const m = Math.floor((totalSeconds % 3600) / 60);
+        const s = totalSeconds % 60;
+
+        document.getElementById('timer').textContent =
+          `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+
+      }, 1000);
+    }
+
+    function startGeolocation() {
+      if (!navigator.geolocation) return;
+      navigator.geolocation.watchPosition(pos => {
+        const { latitude, longitude } = pos.coords;
+        const playerIcon = L.divIcon({
+          className: '',
+          html: '<div class="player-marker"></div>',
+          iconSize: [20, 20],
+          iconAnchor: [10, 10]
+        });
+        if (playerMarker) {
+          playerMarker.setLatLng([latitude, longitude]);
+        } else {
+          playerMarker = L.marker([latitude, longitude], { icon: playerIcon }).addTo(map);
+          map.setView([latitude, longitude], 15);
+        }
+      }, null, { enableHighAccuracy: true });
+    }
+
+    async function init() {
+      await loadLocations();
+      await loadProgress();
+      renderMarkers();
+      renderWordBar();
+      loadState();
+      startGeolocation();
+    }
+
+    init();
+  </script>
+</body>
+
+</html>

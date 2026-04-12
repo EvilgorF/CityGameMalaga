@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta charset="utf-8" />
+  <title>City Game – Opdracht</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/globals.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .frame {
+      display: flex !important;
+      flex-direction: column !important;
+      overflow-y: auto !important;
+    }
+
+    /* Back button */
+    .back-btn {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 20px 0;
+      background: transparent;
+      border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+      cursor: pointer;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Location photo */
+    .location-photo {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .location-photo-placeholder {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #1a1a2e, #d1030b22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .location-photo-placeholder span {
+      font-size: 48px;
+      opacity: 0.3;
+    }
+
+    /* Card */
+    .task-card {
+      position: relative;
+      z-index: 3;
+      margin: -20px 16px 0;
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .character-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: #d1030b;
+      border-radius: 50%;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .location-name {
+      font-size: clamp(18px, 5vw, 24px);
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-top: 4px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #d1030b;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .task-description {
+      font-size: 14px;
+      font-weight: 600;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    /* Photo upload */
+    .upload-area {
+      border: 2px dashed rgba(209, 3, 11, 0.3);
+      border-radius: 14px;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: rgba(209, 3, 11, 0.03);
+    }
+
+    .upload-area:active {
+      background: rgba(209, 3, 11, 0.08);
+    }
+
+    .upload-area.has-photo {
+      border-style: solid;
+      border-color: rgba(209, 3, 11, 0.5);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .upload-area img {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+    }
+
+    .upload-icon {
+      font-size: 32px;
+      opacity: 0.4;
+    }
+
+    .upload-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #888;
+      text-align: center;
+    }
+
+    #photo-input {
+      display: none;
+    }
+
+    /* Submit button */
+    .submit-btn {
+      width: 100%;
+      height: 52px;
+      background: #d1030b;
+      border: none;
+      border-radius: 14px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .submit-btn:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+
+    .submit-btn.loading::after {
+      content: '';
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Success state */
+    .success-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0, 0, 0, 0.7);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .success-overlay.show {
+      display: flex;
+    }
+
+    .success-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 32px 24px;
+      text-align: center;
+      width: min(85vw, 320px);
+    }
+
+    .success-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .success-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+
+    .success-subtitle {
+      font-size: 14px;
+      color: #888;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .success-back-btn {
+      width: 100%;
+      height: 48px;
+      background: #d1030b;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Error message */
+    .error-msg {
+      display: none;
+      font-size: 13px;
+      color: #d1030b;
+      text-align: center;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="frame">
+    <img class="image" src="img/Achtergrond.png" alt="" aria-hidden="true" />
+
+    <!-- Back button -->
+    <button class="back-btn" onclick="window.history.back()">
+      ← Terug naar kaart
+    </button>
+
+    <!-- Location photo -->
+    <div class="location-photo-placeholder" id="photo-placeholder">
+      <span>📍</span>
+    </div>
+    <img class="location-photo" id="location-photo" style="display:none;" alt="Locatie foto" />
+
+    <!-- Task card -->
+    <div class="task-card">
+
+      <!-- Header -->
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="character-badge" id="character-badge">?</div>
+        <div>
+          <div class="location-name" id="location-name">Laden...</div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- Opdracht -->
+      <div>
+        <div class="section-label">Opdracht</div>
+        <div class="task-description" id="task-description">Laden...</div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- Foto uploaden -->
+      <div>
+        <div class="section-label">Jouw foto</div>
+        <div class="upload-area" id="upload-area" onclick="document.getElementById('photo-input').click()">
+          <div class="upload-icon">📷</div>
+          <div class="upload-label">Tik om een foto te maken of te uploaden</div>
+        </div>
+        <input type="file" id="photo-input" accept="image/*" capture="environment" />
+      </div>
+
+      <p class="error-msg" id="error-msg"></p>
+
+      <!-- Submit -->
+      <button class="submit-btn" id="submit-btn" disabled onclick="submitPhoto()">
+        Verstuur foto
+      </button>
+
+    </div>
+  </main>
+
+  <!-- Success overlay -->
+  <div class="success-overlay" id="success-overlay">
+    <div class="success-card">
+      <div class="success-icon">✅</div>
+      <div class="success-title">Goed gedaan!</div>
+      <div class="success-subtitle" id="success-subtitle">Opdracht voltooid</div>
+      <button class="success-back-btn" onclick="goBack()">Terug naar kaart</button>
+    </div>
+  </div>
+
+  <script>
+    const locationId = localStorage.getItem('locationId');
+    const gameId = localStorage.getItem('gameId');
+    const teamId = localStorage.getItem('teamId');
+
+    if (!locationId) window.location.href = '/game.html';
+
+    let selectedFile = null;
+    let locationData = null;
+
+    // ── Load location + task ──
+    async function loadLocation() {
+      try {
+        const res = await fetch(`http://localhost:8080/api/location/${locationId}`);
+        locationData = await res.json();
+
+        document.getElementById('location-name').textContent = locationData.name;
+        document.getElementById('task-description').textContent = locationData.taskDescription || locationData.description;
+        document.getElementById('character-badge').textContent = locationData.character || '?';
+
+        if (locationData.photo) {
+          document.getElementById('photo-placeholder').style.display = 'none';
+          const img = document.getElementById('location-photo');
+          img.src = locationData.photo;
+          img.style.display = 'block';
+        }
+      } catch (e) {
+        console.error('Locatie laden mislukt', e);
+      }
+    }
+
+    // ── Photo input ──
+    document.getElementById('photo-input').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      selectedFile = file;
+
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const area = document.getElementById('upload-area');
+        area.className = 'upload-area has-photo';
+        area.innerHTML = `<img src="${ev.target.result}" alt="Gekozen foto" />`;
+      };
+      reader.readAsDataURL(file);
+
+      document.getElementById('submit-btn').disabled = false;
+    });
+
+    // ── Submit photo ──
+    async function submitPhoto() {
+      if (!selectedFile) return;
+
+      const btn = document.getElementById('submit-btn');
+      const err = document.getElementById('error-msg');
+      if (!teamId) {
+        err.textContent = 'Geen team gevonden. Ga terug en sluit opnieuw aan bij het spel.';
+        err.style.display = 'block';
+        return;
+      }
+      btn.disabled = true;
+      btn.classList.add('loading');
+      btn.textContent = '';
+      err.style.display = 'none';
+
+      try {
+        const formData = new FormData();
+        formData.append('photo', selectedFile);
+        formData.append('locationId', locationId);
+        formData.append('teamId', teamId);
+
+        const res = await fetch(`http://localhost:8080/api/task/submit`, {
+          method: 'POST',
+          credentials: 'include',
+          body: formData
+        });
+
+        let data;
+        try {
+          data = await res.json();
+        } catch {
+          throw new Error('Ongeldige response van server');
+        }
+
+        if (!res.ok) {
+          throw new Error(data.message || data.error || `Serverfout (${res.status})`);
+        }
+
+        const letter = (data.character || locationData?.character || '?').trim();
+        document.getElementById('success-subtitle').textContent =
+          `Je hebt de letter "${letter}" verdiend!`;
+        document.getElementById('success-overlay').classList.add('show');
+
+      } catch (e) {
+        err.textContent = e.message;
+        err.style.display = 'block';
+        btn.disabled = false;
+        btn.classList.remove('loading');
+        btn.textContent = 'Verstuur foto';
+      }
+    }
+
+    function goBack() {
+      window.location.href = '/game.html';
+    }
+
+    loadLocation();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="City Game" />
+  <meta name="theme-color" content="#d1030b" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta charset="utf-8" />
+  <title>City Game – Wachten</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/globals.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="apple-touch-icon" href="img/icon-192.png" />
+  <link rel="icon" href="img/icon-192.png" />
+  <style>
+    /* Fix layout */
+    .frame {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    .lobby-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2vh;
+      width: 100%;
+    }
+
+    .status-badge {
+      display: inline-block;
+      background-color: rgba(209, 3, 11, 0.12);
+      border: 1px solid rgba(209, 3, 11, 0.3);
+      border-radius: 20px;
+      padding: 6px 18px;
+      font-size: clamp(11px, 3vw, 13px);
+      font-weight: 700;
+      color: #d1030b;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .team-name-display {
+      font-family: "Montserrat", Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: clamp(20px, 6vw, 28px);
+      color: #1a1a1a;
+      text-align: center;
+    }
+
+    .waiting-label {
+      font-family: "Montserrat", Helvetica, Arial, sans-serif;
+      font-size: clamp(13px, 3.5vw, 15px);
+      font-weight: 600;
+      color: #888;
+      text-align: center;
+    }
+
+    .dots {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      margin: 4px 0;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #d1030b;
+      animation: pulse-dot 1.4s ease-in-out infinite;
+    }
+
+    .dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      80%,
+      100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+      }
+
+      40% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .info-block {
+      width: 100%;
+      background-color: rgba(60, 60, 67, 0.06);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .info-label {
+      font-size: clamp(12px, 3vw, 13px);
+      font-weight: 600;
+      color: #3c3c4399;
+    }
+
+    .info-value {
+      font-size: clamp(12px, 3vw, 13px);
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .conn-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #888;
+    }
+
+    .conn-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #ccc;
+      transition: background-color 0.3s;
+    }
+
+    .conn-dot.connected {
+      background-color: #34c759;
+    }
+
+    .conn-dot.error {
+      background-color: #d1030b;
+    }
+
+    .leave-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 12vw;
+      min-height: 45px;
+      padding: 0 4vw;
+      background-color: transparent;
+      border: 1.5px solid rgba(209, 3, 11, 0.5);
+      border-radius: 12px;
+      font-family: "Montserrat", Helvetica, Arial, sans-serif;
+      font-size: clamp(14px, 4vw, 16px);
+      font-weight: 700;
+      color: #d1030b;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 2px;
+    }
+
+    .leave-btn:active {
+      transform: scale(0.98);
+      background-color: rgba(209, 3, 11, 0.06);
+    }
+  </style>
+</head>
+
+<body>
+  <main class="frame">
+    <img class="image" src="img/Achtergrond.png" alt="" aria-hidden="true" />
+
+    <header class="div-2" aria-label="City Game header">
+      <img class="mdi-map-marker" src="img/mdi_map-marker.png" alt="Locatie marker" />
+      <h1 class="text-wrapper-3">CITY GAME</h1>
+      <div class="div-3" role="separator" aria-hidden="true"></div>
+    </header>
+
+    <section class="div" aria-label="Wachtkamer">
+      <div class="lobby-content">
+
+        <div class="status-badge">WACHTEN</div>
+
+        <p class="team-name-display" id="team-name-display">—</p>
+
+        <div class="dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+
+        <p class="waiting-label">Wachten tot de admin het spel start...</p>
+
+        <div class="info-block">
+          <div class="info-row">
+            <span class="info-label">Start</span>
+            <span class="info-value" id="start-time">—</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Einde</span>
+            <span class="info-value" id="end-time">—</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Verbinding</span>
+            <span class="conn-status">
+              <span class="conn-dot" id="conn-dot"></span>
+              <span id="conn-label">Verbinden...</span>
+            </span>
+          </div>
+        </div>
+
+        <button class="leave-btn" id="leave-btn">Verlaat lobby</button>
+
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/bundles/stomp.umd.min.js"></script>
+
+  <script>
+    const connDot = document.getElementById('conn-dot');
+    const connLabel = document.getElementById('conn-label');
+
+    // async function init() {
+    //   const gameId = sessionStorage.getItem('gameId');
+    //   const teamName = sessionStorage.getItem('teamName');
+
+    //   console.log('gameId:', gameId);     // добавь
+    //   console.log('teamName:', teamName); // добавь
+
+    //   if (!gameId) {
+    //     window.location.href = '/index.html';
+    //     return;
+    //   }
+
+    //   document.getElementById('team-name-display').textContent = teamName || '—';
+
+    //   await loadState(gameId);
+    //   connectWS(gameId);
+    // }
+
+    async function init() {
+      const gameId = localStorage.getItem('gameId');   // было sessionStorage
+      const teamName = localStorage.getItem('teamName'); // было sessionStorage
+
+      if (!gameId) {
+        window.location.href = '/index.html';
+        return;
+      }
+
+      document.getElementById('team-name-display').textContent = teamName || '—';
+      await loadState(gameId);
+      connectWS(gameId);
+    }
+
+    async function loadState(gameId) {
+      try {
+        const res = await fetch(`http://localhost:8080/api/game/${gameId}/state`, {
+          credentials: 'include'
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+
+        if (data.startTime) document.getElementById('start-time').textContent = formatTime(data.startTime);
+        if (data.endTime) document.getElementById('end-time').textContent = formatTime(data.endTime);
+
+        if (data.status === 'ACTIVE') window.location.href = '/game.html';
+        if (data.status === 'FINISHED') window.location.href = '/index.html';
+      } catch (e) {
+        console.error('State laden mislukt', e);
+      }
+    }
+
+    function connectWS(gameId) {
+      const client = new StompJs.Client({
+        webSocketFactory: () => new SockJS('http://localhost:8080/ws'),
+        reconnectDelay: 3000,
+
+        onConnect: () => {
+          connDot.className = 'conn-dot connected';
+          connLabel.textContent = 'Verbonden';
+
+          client.subscribe(`/topic/game/${gameId}`, (msg) => {
+            const event = JSON.parse(msg.body);
+            if (event.status === 'ACTIVE') window.location.href = '/game.html';
+            if (event.status === 'FINISHED') {
+              if (event.winner) localStorage.setItem('winner', event.winner);
+              window.location.href = '/finish.html';
+            }
+          });
+        },
+
+        onDisconnect: () => {
+          connDot.className = 'conn-dot';
+          connLabel.textContent = 'Verbroken';
+        },
+
+        onStompError: () => {
+          connDot.className = 'conn-dot error';
+          connLabel.textContent = 'Fout';
+        }
+      });
+
+      window._stompClient = client;
+      client.activate();
+    }
+
+    function formatTime(isoString) {
+      return new Date(isoString).toLocaleString('nl-NL', {
+        day: '2-digit', month: '2-digit',
+        hour: '2-digit', minute: '2-digit'
+      });
+    }
+
+    document.getElementById('leave-btn').addEventListener('click', async () => {
+      try {
+        await fetch('http://localhost:8080/api/leave', {
+          method: 'DELETE',
+          credentials: 'include'
+        });
+      } finally {
+        if (window._stompClient) window._stompClient.deactivate();
+        localStorage.clear();
+        window.location.href = '/index.html';
+      }
+    });
+
+    init();
+  </script>
+</body>
+
+</html>
