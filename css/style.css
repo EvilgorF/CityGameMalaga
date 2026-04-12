@@ -1,14 +1,18 @@
-﻿*,
+*,
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
   -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 html,
 body {
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
   height: 100%;
   font-family: 'Montserrat', sans-serif;
   background: #111;
@@ -31,13 +35,6 @@ body {
   background-position: center;
   z-index: 0;
 }
-
-/* .bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-} */
 
 /* ── Header ── */
 header {
@@ -295,5 +292,13 @@ nav {
   .nav-item {
     max-width: 120px;
     padding: 16px 0;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
   }
 }
