@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+
 *,
 *::before,
 *::after {
@@ -12,7 +15,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-  -webkit-tap-highlight-color: transparent;
   height: 100%;
   font-family: 'Montserrat', sans-serif;
   background: #111;
@@ -30,7 +32,7 @@ body {
 .bg {
   position: absolute;
   inset: 0;
-  background-image: url("../img/Achtergrond.png");
+  background-image: url("../img/achtergrond.webp");
   background-size: cover;
   background-position: center;
   z-index: 0;
@@ -43,41 +45,15 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 48px 24px 24px;
+  gap: 10px;
+  padding: 52px 24px 20px;
 }
 
-.logo-icon {
-  width: 36px;
-  height: 36px;
-  background: #d1030b;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.logo-icon svg {
-  width: 20px;
-  height: 20px;
-  fill: white;
-}
-
-header h1 {
-  font-size: clamp(22px, 6vw, 36px);
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 4px;
-}
-
-.divider {
-  width: 40%;
-  margin: 0 auto;
-  border: none;
-  border-top: 1px dashed rgba(255, 255, 255, 0.2);
-  position: relative;
-  z-index: 2;
+.logo-img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  margin-top: 50px;
 }
 
 /* ── Main content ── */
@@ -92,50 +68,27 @@ main {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 24px;
-  padding: 32px 28px;
+  background: rgba(255, 255, 255);
+  border: 1px solid rgba(255, 255, 255);
+  border-radius: 10px;
+  padding: 28px 24px 24px;
   width: 100%;
-  max-width: 380px;
-}
-
-.card-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-align: center;
-  margin-bottom: 24px;
+  max-width: 340px;
 }
 
 .field {
-  margin-bottom: 14px;
-}
-
-.field label {
-  display: block;
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .field input {
   width: 100%;
-  height: 52px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  padding: 0 18px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(255, 255, 255);
+  padding: 0 16px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
   color: #fff;
   outline: none;
   transition: border-color 0.2s, background 0.2s;
@@ -144,28 +97,27 @@ main {
 }
 
 .field input::placeholder {
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(0, 0, 0, 0.5);
   font-weight: 400;
 }
 
 .field input:focus {
-  border-color: rgba(209, 3, 11, 0.6);
-  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(0, 0, 0, 0.65);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .btn {
   width: 100%;
-  height: 52px;
+  height: 50px;
   background: #d1030b;
-  border: none;
-  border-radius: 14px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: #fff;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   cursor: pointer;
-  margin-top: 8px;
+  margin-top: 6px;
   transition: background 0.2s, transform 0.1s;
 }
 
@@ -191,10 +143,10 @@ nav {
   position: relative;
   z-index: 2;
   display: flex;
-  background: rgba(10, 10, 20, 0.8);
+  background: rgba(8, 8, 18, 0.82);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
   padding-bottom: env(safe-area-inset-bottom);
 }
 
@@ -205,7 +157,7 @@ nav {
   align-items: center;
   justify-content: center;
   gap: 5px;
-  padding: 14px 0;
+  padding: 13px 0;
   cursor: pointer;
   transition: opacity 0.2s;
   text-decoration: none;
@@ -226,15 +178,16 @@ nav {
   justify-content: center;
 }
 
-.nav-icon svg {
+.nav-icon svg,
+.nav-icon img {
   width: 22px;
   height: 22px;
 }
 
 .nav-label {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
 }
 
@@ -247,42 +200,139 @@ nav {
 }
 
 .nav-item:not(.active) .nav-icon svg {
-  fill: rgba(255, 255, 255, 0.35);
+  fill: rgba(255, 255, 255, 0.3);
 }
 
 .nav-item:not(.active) .nav-label {
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.3);
 }
 
-/* ── Desktop layout ── */
+/* ── iPhone SE / kleine schermen (≤375px) ── */
+@media (max-width: 375px) {
+  header {
+    padding: 28px 16px 12px;
+  }
+
+  .logo-img {
+    height: 42px;
+  }
+
+  main {
+    padding: 16px 14px;
+  }
+
+  .card {
+    padding: 20px 16px 18px;
+    border-radius: 16px;
+    max-width: 100%;
+  }
+
+  .field {
+    margin-bottom: 9px;
+  }
+
+  .field input {
+    height: 42px;
+    font-size: 13px;
+    border-radius: 10px;
+    padding: 0 13px;
+  }
+
+  .btn {
+    height: 42px;
+    font-size: 12px;
+    border-radius: 10px;
+    margin-top: 4px;
+  }
+
+  .nav-item {
+    padding: 10px 0;
+    gap: 3px;
+  }
+
+  .nav-icon,
+  .nav-icon svg,
+  .nav-icon img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .nav-label {
+    font-size: 8px;
+  }
+}
+
+/* ── iPhone 12/13/14 & gangbare Android (376px–430px) ── */
+@media (min-width: 376px) and (max-width: 430px) {
+  header {
+    padding: 36px 20px 14px;
+  }
+
+  .logo-img {
+    height: 50px;
+  }
+
+  main {
+    padding: 20px 16px;
+  }
+
+  .card {
+    padding: 22px 18px 20px;
+    max-width: 100%;
+  }
+
+  .field input {
+    height: 46px;
+    font-size: 14px;
+  }
+
+  .btn {
+    height: 46px;
+    font-size: 13px;
+  }
+}
+
+/* ── iPhone Pro Max / grote Android (431px–767px) ── */
+@media (min-width: 431px) and (max-width: 767px) {
+  header {
+    padding: 40px 24px 16px;
+  }
+
+  .logo-img {
+    height: 56px;
+  }
+
+  .card {
+    max-width: 360px;
+    padding: 26px 22px;
+  }
+
+  .field input,
+  .btn {
+    height: 50px;
+    font-size: 14px;
+  }
+}
+
+/* ── Tablet & desktop (≥768px) ── */
 @media (min-width: 768px) {
   header {
     padding: 64px 40px 32px;
   }
 
-  header h1 {
-    font-size: 42px;
-  }
-
-  .logo-icon {
-    width: 48px;
-    height: 48px;
-  }
-
-  .logo-icon svg {
-    width: 26px;
-    height: 26px;
+  .logo-img {
+    height: 80px;
   }
 
   .card {
-    padding: 48px 40px;
-    max-width: 440px;
+    padding: 44px 36px;
+    max-width: 400px;
   }
 
   .field input,
   .btn {
-    height: 56px;
-    font-size: 16px;
+    height: 54px;
+    font-size: 15px;
   }
 
   nav {
@@ -295,7 +345,47 @@ nav {
   }
 }
 
-/* Reduced motion support */
+/* ── Landscape op kleine telefoons ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  header {
+    padding: 12px 20px 8px;
+  }
+
+  .logo-img {
+    height: 32px;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  main {
+    padding: 8px 16px;
+  }
+
+  .card {
+    padding: 14px 16px;
+  }
+
+  .field {
+    margin-bottom: 7px;
+  }
+
+  .field input,
+  .btn {
+    height: 38px;
+    font-size: 13px;
+  }
+
+  nav {
+    padding: 4px 0;
+  }
+
+  .nav-item {
+    padding: 6px 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
