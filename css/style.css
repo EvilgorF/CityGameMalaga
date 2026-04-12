@@ -1,13 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
+  /* Gebruikersselectie op 'auto' voor de inputs zodat je tekst kunt typen */
   user-select: none;
 }
 
@@ -36,6 +34,7 @@ body {
   background-size: cover;
   background-position: center;
   z-index: 0;
+  opacity: 0.6;
 }
 
 /* ── Header ── */
@@ -43,17 +42,14 @@ header {
   position: relative;
   z-index: 2;
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 52px 24px 20px;
+  padding: 50px 24px 0;
 }
 
 .logo-img {
   height: 60px;
   width: auto;
   object-fit: contain;
-  margin-top: 50px;
 }
 
 /* ── Main content ── */
@@ -64,52 +60,65 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px 20px;
+  padding: 20px;
 }
 
 .card {
-  background: rgba(255, 255, 255);
-  border: 1px solid rgba(255, 255, 255);
+  background: #ffffff;
+  border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 28px 24px 24px;
+  /* Precies 10px zoals gevraagd */
+  padding: 28px 24px;
   width: 100%;
   max-width: 340px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .field {
   margin-bottom: 12px;
 }
 
+/* ── Invoervelden ── */
 .field input {
   width: 100%;
   height: 50px;
-  background: rgba(255, 255, 255, 0);
-  border: 1px solid rgba(255, 255, 255);
+  background: #ececec;
+  /* Grijze achtergrond */
+  border: 1px solid #555;
   padding: 0 16px;
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;
   font-weight: 500;
-  color: #fff;
+  color: #333;
   outline: none;
-  transition: border-color 0.2s, background 0.2s;
+
+  /* Voorkomt vage hoekjes rendering */
+  -webkit-appearance: none;
+  appearance: none;
+
+  /* Zorg dat je tekst wel kunt selecteren in een input */
   -webkit-user-select: text;
   user-select: text;
+
+  transition: all 0.2s ease;
 }
 
 .field input::placeholder {
-  color: rgba(0, 0, 0, 0.5);
-  font-weight: 400;
+  color: #777;
 }
 
+/* Focus: wit met grijze border */
 .field input:focus {
-  border-color: rgba(0, 0, 0, 0.65);
-  background: rgba(255, 255, 255, 0.12);
+  background: #ffffff;
+  border-color: #999;
 }
 
+/* ── Bevestigen Knop ── */
 .btn {
   width: 100%;
   height: 50px;
   background: #d1030b;
+  border: none;
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   font-weight: 700;
@@ -117,25 +126,20 @@ main {
   letter-spacing: 1.5px;
   text-transform: uppercase;
   cursor: pointer;
-  margin-top: 6px;
+  margin-top: 8px;
   transition: background 0.2s, transform 0.1s;
-}
-
-.btn:hover {
-  background: #b8020a;
 }
 
 .btn:active {
   transform: scale(0.98);
-  background: #a00208;
 }
 
 .error-msg {
-  display: none;
   font-size: 13px;
   color: #ff6b6b;
   text-align: center;
   margin-top: 12px;
+  min-height: 1em;
 }
 
 /* ── Bottom nav ── */
@@ -146,7 +150,7 @@ nav {
   background: rgba(8, 8, 18, 0.82);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: env(safe-area-inset-bottom);
 }
 
@@ -159,29 +163,23 @@ nav {
   gap: 5px;
   padding: 13px 0;
   cursor: pointer;
-  transition: opacity 0.2s;
   text-decoration: none;
-  border: none;
   background: none;
+  border: none;
+  /* Verwijder borders van de nav knoppen */
   font-family: 'Montserrat', sans-serif;
+  color: rgba(255, 255, 255, 0.3);
 }
 
-.nav-item:active {
-  opacity: 0.5;
+.nav-item.active {
+  color: #fff;
 }
 
-.nav-icon {
+.nav-icon svg {
   width: 22px;
   height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav-icon svg,
-.nav-icon img {
-  width: 22px;
-  height: 22px;
+  fill: currentColor;
+  /* Kleur volgt de tekstkleur */
 }
 
 .nav-label {
@@ -191,204 +189,17 @@ nav {
   text-transform: uppercase;
 }
 
-.nav-item.active .nav-icon svg {
-  fill: #fff;
-}
-
-.nav-item.active .nav-label {
-  color: #fff;
-}
-
-.nav-item:not(.active) .nav-icon svg {
-  fill: rgba(255, 255, 255, 0.3);
-}
-
-.nav-item:not(.active) .nav-label {
-  color: rgba(255, 255, 255, 0.3);
-}
-
-/* ── iPhone SE / kleine schermen (≤375px) ── */
+/* ── Responsiviteit ── */
 @media (max-width: 375px) {
   header {
-    padding: 28px 16px 12px;
+    padding-top: 30px;
   }
 
   .logo-img {
-    height: 42px;
-  }
-
-  main {
-    padding: 16px 14px;
+    height: 45px;
   }
 
   .card {
-    padding: 20px 16px 18px;
-    border-radius: 16px;
-    max-width: 100%;
-  }
-
-  .field {
-    margin-bottom: 9px;
-  }
-
-  .field input {
-    height: 42px;
-    font-size: 13px;
-    border-radius: 10px;
-    padding: 0 13px;
-  }
-
-  .btn {
-    height: 42px;
-    font-size: 12px;
-    border-radius: 10px;
-    margin-top: 4px;
-  }
-
-  .nav-item {
-    padding: 10px 0;
-    gap: 3px;
-  }
-
-  .nav-icon,
-  .nav-icon svg,
-  .nav-icon img {
-    width: 18px;
-    height: 18px;
-  }
-
-  .nav-label {
-    font-size: 8px;
-  }
-}
-
-/* ── iPhone 12/13/14 & gangbare Android (376px–430px) ── */
-@media (min-width: 376px) and (max-width: 430px) {
-  header {
-    padding: 36px 20px 14px;
-  }
-
-  .logo-img {
-    height: 50px;
-  }
-
-  main {
     padding: 20px 16px;
-  }
-
-  .card {
-    padding: 22px 18px 20px;
-    max-width: 100%;
-  }
-
-  .field input {
-    height: 46px;
-    font-size: 14px;
-  }
-
-  .btn {
-    height: 46px;
-    font-size: 13px;
-  }
-}
-
-/* ── iPhone Pro Max / grote Android (431px–767px) ── */
-@media (min-width: 431px) and (max-width: 767px) {
-  header {
-    padding: 40px 24px 16px;
-  }
-
-  .logo-img {
-    height: 56px;
-  }
-
-  .card {
-    max-width: 360px;
-    padding: 26px 22px;
-  }
-
-  .field input,
-  .btn {
-    height: 50px;
-    font-size: 14px;
-  }
-}
-
-/* ── Tablet & desktop (≥768px) ── */
-@media (min-width: 768px) {
-  header {
-    padding: 64px 40px 32px;
-  }
-
-  .logo-img {
-    height: 80px;
-  }
-
-  .card {
-    padding: 44px 36px;
-    max-width: 400px;
-  }
-
-  .field input,
-  .btn {
-    height: 54px;
-    font-size: 15px;
-  }
-
-  nav {
-    justify-content: center;
-  }
-
-  .nav-item {
-    max-width: 120px;
-    padding: 16px 0;
-  }
-}
-
-/* ── Landscape op kleine telefoons ── */
-@media (max-height: 500px) and (orientation: landscape) {
-  header {
-    padding: 12px 20px 8px;
-  }
-
-  .logo-img {
-    height: 32px;
-  }
-
-  .divider {
-    display: none;
-  }
-
-  main {
-    padding: 8px 16px;
-  }
-
-  .card {
-    padding: 14px 16px;
-  }
-
-  .field {
-    margin-bottom: 7px;
-  }
-
-  .field input,
-  .btn {
-    height: 38px;
-    font-size: 13px;
-  }
-
-  nav {
-    padding: 4px 0;
-  }
-
-  .nav-item {
-    padding: 6px 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    transition: none !important;
-    animation: none !important;
   }
 }
