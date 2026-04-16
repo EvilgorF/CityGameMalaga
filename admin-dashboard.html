@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Beheer inloggen</title>
+  <title>Beheerpaneel</title>
   <link rel="stylesheet" href="css/globals.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/admin.css" />
@@ -18,21 +18,34 @@
       <img src="img/icon_192.png" alt="City Game" class="logo-img" />
     </header>
 
-    <main class="admin-main">
-      <section class="card admin-card">
-        <div class="admin-badge">Beheer</div>
-        <h1 class="admin-title">Inloggen als beheerder</h1>
-        <p class="admin-text">Log in om een spel te maken en de laatste 10 spellen te beheren.</p>
-
-        <div class="field">
-          <input id="username" type="text" placeholder="Gebruikersnaam" />
-        </div>
-        <div class="field">
-          <input id="password" type="password" placeholder="Wachtwoord" />
+    <main class="admin-main admin-dashboard-main">
+      <section class="card admin-card admin-dashboard-card">
+        <div class="admin-topbar">
+          <div>
+            <div class="admin-badge">Beheer</div>
+            <h1 class="admin-title">Beheerpaneel</h1>
+            <p class="admin-text">Maak een nieuw spel of beheer de laatste 10 spellen.</p>
+          </div>
+          <button class="admin-outline-btn" id="logout-btn">Uitloggen</button>
         </div>
 
-        <button id="login-btn" class="btn admin-btn">Inloggen</button>
-        <p class="error-msg admin-message" id="message"></p>
+        <div class="admin-tabs">
+          <button class="admin-tab active" data-tab="create">Spel maken</button>
+          <button class="admin-tab" data-tab="games">Spellen bekijken</button>
+        </div>
+
+        <section class="admin-view active" id="view-create">
+          <div class="field">
+            <input id="start-time" type="datetime-local" />
+          </div>
+          <button id="create-btn" class="btn admin-btn">Spel aanmaken</button>
+          <p class="error-msg admin-message" id="create-message"></p>
+        </section>
+
+        <section class="admin-view" id="view-games">
+          <p class="error-msg admin-message admin-games-message" id="games-message"></p>
+          <div class="admin-games-list" id="games-list"></div>
+        </section>
       </section>
     </main>
 
@@ -66,7 +79,7 @@
       </button>
     </nav>
   </div>
-  <script src="js/admin-login.js"></script>
+  <script src="js/admin-dashboard.js"></script>
 </body>
 
 </html>

@@ -1,8 +1,9 @@
 function url() {
     let url = window.location.origin;
     if (url.includes(`github.io`)) {
-        url += `/CityGameMalaga`
+        url += `/CityGameMalaga`;
     }
+    return url;
 }
 let url = url();
 document.getElementById("info").addEventListener("click", () => {

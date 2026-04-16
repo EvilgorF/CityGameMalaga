@@ -2,11 +2,10 @@
 <html lang="nl">
 
 <head>
+  <meta charset="utf-8" />
   <meta name="viewport"
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta charset="utf-8" />
-  <title>City Game – Spelen</title>
+  <title>City Game - Kaart</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -36,14 +35,15 @@
       justify-content: space-between;
       padding: 12px 16px;
       padding-top: calc(12px + env(safe-area-inset-top));
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .12);
     }
 
     .topbar-left {
       display: flex;
       flex-direction: column;
+      gap: 2px;
     }
 
     .game-title {
@@ -55,21 +55,18 @@
     .locations-found {
       font-size: 12px;
       font-weight: 600;
-      color: #888;
+      color: #8c8c8c;
     }
 
     .timer {
       font-size: 22px;
       font-weight: 700;
-      color: #d1030b;
+      color: #c1331d;
     }
 
     #map {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       z-index: 1;
     }
 
@@ -84,9 +81,9 @@
       gap: 10px;
       padding: 16px;
       padding-bottom: calc(16px + env(safe-area-inset-bottom));
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 -2px 12px rgba(0, 0, 0, .12);
     }
 
     .letter-box {
@@ -99,24 +96,24 @@
       font-size: 22px;
       font-weight: 700;
       color: #1a1a1a;
-      transition: all 0.3s;
+      transition: all .3s;
     }
 
     .letter-box.found {
-      border-color: #d1030b;
-      color: #d1030b;
+      border-color: #c1331d;
+      color: #c1331d;
     }
 
     .leaflet-popup-content-wrapper {
       border-radius: 16px !important;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .15) !important;
       padding: 0 !important;
       overflow: hidden;
     }
 
     .leaflet-popup-content {
       margin: 0 !important;
-      width: 220px !important;
+      width: 230px !important;
     }
 
     .popup-inner {
@@ -124,15 +121,13 @@
     }
 
     .popup-name {
-      font-family: 'Montserrat', sans-serif;
       font-size: 15px;
       font-weight: 700;
       color: #1a1a1a;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .popup-desc {
-      font-family: 'Montserrat', sans-serif;
       font-size: 12px;
       color: #888;
       margin-bottom: 12px;
@@ -143,7 +138,7 @@
       display: block;
       width: 100%;
       padding: 10px;
-      background: #d1030b;
+      background: #c1331d;
       color: #fff;
       border: none;
       border-radius: 10px;
@@ -164,9 +159,9 @@
       height: 36px;
       border-radius: 50% 50% 50% 0;
       transform: rotate(-45deg);
-      background: #d1030b;
+      background: #c1331d;
       border: 3px solid #fff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -189,228 +184,164 @@
       border-radius: 50%;
       background: #007aff;
       border: 3px solid #fff;
-      box-shadow: 0 2px 8px rgba(0, 0, 255, 0.3);
+      box-shadow: 0 2px 8px rgba(0, 0, 255, .3);
     }
   </style>
 </head>
 
 <body>
-
   <div class="topbar">
     <div class="topbar-left">
-      <span class="game-title">City Game</span>
-      <span class="locations-found" id="found-label">0 van 0 ontdekt</span>
+      <span class="game-title" id="team-label">City Game</span>
+      <span class="locations-found" id="found-label">0 van 0 locaties voltooid</span>
     </div>
-    <div class="timer" id="timer">--:--</div>
+    <div class="timer" id="timer">--:--:--</div>
   </div>
-
   <div id="map"></div>
   <div class="wordbar" id="wordbar"></div>
-
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    // ── localStorage ipv sessionStorage ──
-    const gameId = localStorage.getItem('gameId');
-    const teamId = localStorage.getItem('teamId');
-    const teamName = localStorage.getItem('teamName');
+    const API_BASE = 'http://localhost:8080';
+    const TEAM_TOKEN_KEY = 'teamToken';
+    const teamToken = localStorage.getItem(TEAM_TOKEN_KEY);
+    if (!teamToken) window.location.href = 'index.html';
 
-    if (!gameId) window.location.href = '/index.html';
+    function clearTeamSession() {
+      localStorage.removeItem(TEAM_TOKEN_KEY);
+    }
+    function authHeaders() { return teamToken ? { Authorization: `Bearer ${teamToken}` } : {}; }
 
+    async function fetchJson(path) {
+      const response = await fetch(`${API_BASE}${path}`, { credentials: 'include', headers: authHeaders() });
+      const text = await response.text();
+      let data = null;
+      if (text) { try { data = JSON.parse(text); } catch { data = { message: text }; } }
+      if (!response.ok) throw new Error(data?.message || `HTTP ${response.status}`);
+      return data;
+    }
+
+    let me = null;
     let locations = [];
     let completed = new Set();
     let endTime = null;
     let playerMarker = null;
+    let timerStarted = false;
 
-    const map = L.map('map', { zoomControl: false, attributionControl: false })
-      .setView([36.7213, -4.4193], 15);
-
+    const map = L.map('map', { zoomControl: false, attributionControl: false }).setView([36.7213, -4.4193], 15);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-    async function loadLocations() {
-      try {
-        const res = await fetch(`http://localhost:8080/api/game/${gameId}/locations`);
-        locations = await res.json();
-      } catch (e) {
-        console.error('Locaties laden mislukt', e);
-      }
+    async function loadIdentity() {
+      me = await fetchJson('/api/game/me');
+      document.getElementById('team-label').textContent = me.teamName;
     }
+
+    async function loadLocations() { locations = await fetchJson(`/api/game/${me.gameId}/locations`); }
 
     async function loadProgress() {
-      if (!teamId) return;
-      try {
-        const res = await fetch(`http://localhost:8080/api/team/${teamId}/progress`);
-        const data = await res.json();
-
-        if (!Array.isArray(data)) return;
-
-        data.forEach(p => {
-          const loc = locations.find(l => l.taskId === p.taskId);
-          if (loc) completed.add(loc.id);
-        });
-      } catch (e) {
-        console.error('Progress laden mislukt', e);
-      }
+      const data = await fetchJson(`/api/team/${me.teamId}/progress`);
+      completed = new Set();
+      if (!Array.isArray(data)) return;
+      data.forEach((item) => {
+        const location = locations.find((loc) => loc.taskId === item.taskId);
+        if (location) completed.add(location.id);
+      });
     }
 
-    // async function loadState() {
-    //   try {
-    //     const res = await fetch(`http://localhost:8080/api/game/${gameId}/state`);
-    //     const data = await res.json();
-    //     if (data.endTime) {
-    //       endTime = new Date(data.endTime);
-    //       startTimer();
-    //     }
-    //     if (data.status === 'FINISHED') window.location.href = '/index.html';
-    //   } catch (e) {
-    //     console.error('State laden mislukt', e);
-    //   }
-    // }
-
     async function loadState() {
-      try {
-        const res = await fetch(`http://localhost:8080/api/game/${gameId}/state`);
-        const data = await res.json();
-
-        if (data.endTime) {
-          endTime = new Date(data.endTime);
-          console.log("END RAW:", data.endTime);
-          console.log("END DATE:", endTime);
-          startTimer();
-        }
-
-        if (event.status === 'FINISHED') {
-          if (event.winner) localStorage.setItem('winner', event.winner);
-          window.location.href = '/finish.html';
-        }
-      } catch (e) {
-        console.error('State laden mislukt', e);
-      }
+      const game = await fetchJson(`/api/game/${me.gameId}/state`);
+      if (game.endTime) { endTime = new Date(game.endTime); startTimer(); }
+      if (game.status === 'WAITING') window.location.href = 'lobby.html';
+      if (game.status === 'FINISHED') { clearTeamSession(); window.location.href = 'index.html'; }
     }
 
     function renderMarkers() {
-      map.eachLayer(layer => {
+      map.eachLayer((layer) => {
         if (layer instanceof L.Marker) map.removeLayer(layer);
       });
-
-      locations.forEach(loc => {
+      locations.forEach((loc) => {
         const isCompleted = completed.has(loc.id);
-
         const icon = L.divIcon({
           className: '',
-          html: `<div class="custom-marker ${isCompleted ? 'completed' : ''}">
-                   <span>${loc.character || '?'}</span>
-                 </div>`,
+          html: `<div class="custom-marker ${isCompleted ? 'completed' : ''}"><span>${isCompleted && loc.character || '?'}</span></div>`,
           iconSize: [36, 36],
           iconAnchor: [18, 36],
           popupAnchor: [0, -36]
         });
-
         const marker = L.marker([loc.lat, loc.lng], { icon }).addTo(map);
         marker.bindPopup(`
           <div class="popup-inner">
             <div class="popup-name">${loc.name}</div>
             <div class="popup-desc">${loc.description || ''}</div>
-            <button class="popup-btn ${isCompleted ? 'completed' : ''}"
-                    onclick="openTask(${loc.id})"
-                    ${isCompleted ? 'disabled' : ''}>
-              ${isCompleted ? '✓ Voltooid' : 'Bekijken →'}
+            <button class="popup-btn ${isCompleted ? 'completed' : ''}" onclick="openTask(${loc.id})" ${isCompleted ? 'disabled' : ''}>
+              ${isCompleted ? 'Voltooid' : 'Open opdracht'}
             </button>
           </div>
         `, { closeButton: false });
       });
-
       if (playerMarker) playerMarker.addTo(map);
     }
 
     function renderWordBar() {
       const wordbar = document.getElementById('wordbar');
       wordbar.innerHTML = '';
-      locations.forEach(loc => {
+      locations.forEach((loc) => {
         const box = document.createElement('div');
-        box.className = 'letter-box' + (completed.has(loc.id) ? ' found' : '');
-        box.id = `letter-${loc.id}`;
+        box.className = `letter-box${completed.has(loc.id) ? ' found' : ''}`;
         box.textContent = completed.has(loc.id) ? (loc.character || '?') : '';
         wordbar.appendChild(box);
       });
-      document.getElementById('found-label').textContent =
-        `${completed.size} van ${locations.length} ontdekt`;
+      document.getElementById('found-label').textContent = `${completed.size} van ${locations.length} locaties voltooid`;
     }
 
-    function openTask(locationId) {
-      localStorage.setItem('locationId', locationId); // localStorage
-      window.location.href = '/task.html';
-    }
-
-    // function startTimer() {
-    //   setInterval(() => {
-    //     if (!endTime) return;
-    //     const diff = endTime - new Date();
-    //     if (diff <= 0) {
-    //       document.getElementById('timer').textContent = '0:00:00';
-    //       window.location.href = '/index.html';
-    //       return;
-    //     }
-
-    //     const h = Math.floor(diff / 3600000);
-    //     const m = Math.floor((diff % 3600000) / 60000);
-    //     const s = Math.floor((diff % 60000) / 1000);
-
-    //     document.getElementById('timer').textContent =
-    //       `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-    //   }, 1000);
-    // }
+    function openTask(locationId) { window.location.href = `task.html?locationId=${locationId}`; }
 
     function startTimer() {
+      if (timerStarted) return;
+      timerStarted = true;
       setInterval(() => {
         if (!endTime) return;
-
-        const now = new Date();
-        const diff = endTime.getTime() - now.getTime();
-
+        const diff = endTime.getTime() - Date.now();
         if (diff <= 0) {
           document.getElementById('timer').textContent = '0:00:00';
-          window.location.href = '/index.html';
+          clearTeamSession();
+          window.location.href = 'index.html';
           return;
         }
-
         const totalSeconds = Math.floor(diff / 1000);
-
-        const h = Math.floor(totalSeconds / 3600);
-        const m = Math.floor((totalSeconds % 3600) / 60);
-        const s = totalSeconds % 60;
-
-        document.getElementById('timer').textContent =
-          `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        document.getElementById('timer').textContent = `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
       }, 1000);
     }
 
     function startGeolocation() {
       if (!navigator.geolocation) return;
-      navigator.geolocation.watchPosition(pos => {
-        const { latitude, longitude } = pos.coords;
-        const playerIcon = L.divIcon({
-          className: '',
-          html: '<div class="player-marker"></div>',
-          iconSize: [20, 20],
-          iconAnchor: [10, 10]
-        });
+      navigator.geolocation.watchPosition((position) => {
+        const playerIcon = L.divIcon({ className: '', html: '<div class="player-marker"></div>', iconSize: [20, 20], iconAnchor: [10, 10] });
+        const latLng = [position.coords.latitude, position.coords.longitude];
         if (playerMarker) {
-          playerMarker.setLatLng([latitude, longitude]);
+          playerMarker.setLatLng(latLng);
         } else {
-          playerMarker = L.marker([latitude, longitude], { icon: playerIcon }).addTo(map);
-          map.setView([latitude, longitude], 15);
+          playerMarker = L.marker(latLng, { icon: playerIcon }).addTo(map);
+          map.setView(latLng, 15);
         }
       }, null, { enableHighAccuracy: true });
     }
 
     async function init() {
-      await loadLocations();
-      await loadProgress();
-      renderMarkers();
-      renderWordBar();
-      loadState();
-      startGeolocation();
+      try {
+        await loadIdentity();
+        await loadLocations();
+        await loadProgress();
+        renderMarkers();
+        renderWordBar();
+        await loadState();
+        startGeolocation();
+      } catch {
+        clearTeamSession();
+        window.location.href = 'index.html';
+      }
     }
 
     init();
